@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+  backendapp:
+    container_name: backendapp
+    build:
+      context: ./etc/docker/python
+    privileged: true
+    command: bash -c "cd backend && bash run_backend.bash"
+    #stdin_open: true
+    #tty: true
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+      - SFT_CONFIG=prod
+      - SCHEME=https
+      - SECRET_KEY=nnZoFFARCoYgQmDdLGrawbCTUdBXUalcXBrONMjESnTXBDdFDPLyIiQUjHKtQBOAJUUEFZVGdYrHoOTSRYWiHdQPDmqRQEoUswuJ
+      - DATABASE_URI=postgresql://sft_backend:U1ZclW3JXdwO1p4W@sft.space:5432/sft_production
+      - UPLOAD_FOLDER=/home/sftadmin/sft/uploaded_files
+      - MAIL_DEFAULT_SENDER=info@sft.space
+      - MAIL_SERVER=smtp.strato.de
+      - MAIL_PORT=465
+      - MAIL_USERNAME=info@sft.space
+      - MAIL_PASSWORD=Gron45Hu.2019
+      - MAIL_USE_SSL=True
+      - FRONTEND_URL=localhost
+      - FRONTEND_EMAIL_CONFIRM_URL=/confirm_email
+      - FRONTEND_PASSWORD_RESET_URL=/reset_password
+    ports:
+      - "5001:5001"
+      - "5000:5000"
+    volumes:
+      - ./src:/usr/src/app
