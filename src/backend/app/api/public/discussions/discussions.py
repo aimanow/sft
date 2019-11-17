@@ -47,7 +47,16 @@ class DiscussionList(Resource):
             return abort(HTTPStatus.BAD_REQUEST, message="'page' must be > 0")
 
         if args['location'] == 'all':
-            items_query = Discussion.query
+            # Discussion.reindex()
+
+            items_query, total_items = Discussion.search(args['q'], int(page_number), items_per_page)
+
+            if args['sort'] == 'popular':
+                items_query = items_query.order_by(desc(Discussion.rating))
+            elif args['sort'] == 'popular_today':
+                items_query = items_query.order_by(desc(Discussion.today_rating))
+            else:
+                items_query = items_query.order_by(Discussion.created_at.desc())
         else:
             if current_user.is_anonymous:
                 return Pagination(items_per_page=items_per_page, items=[])
@@ -55,20 +64,20 @@ class DiscussionList(Resource):
                 FavoriteDiscussion.user_id == current_user.id
             )
 
-        if args['q'] is not None:
-            items_query = items_query.filter(Discussion.title.ilike(f"%{args['q']}%"))
-        if args['author'] is not None:
-            items_query = items_query.filter(Discussion.author_id == args['author'])
+            if args['q'] is not None:
+                items_query = items_query.filter(Discussion.title.ilike(f"%{args['q']}%"))
+            if args['author'] is not None:
+                items_query = items_query.filter(Discussion.author_id == args['author'])
 
-        if args['sort'] == 'popular':
-            items_query = items_query.order_by(desc(Discussion.rating))
-        elif args['sort'] == 'popular_today':
-            items_query = items_query.order_by(desc(Discussion.today_rating))
-        else:
-            items_query = items_query.order_by(Discussion.created_at.desc())
+            if args['sort'] == 'popular':
+                items_query = items_query.order_by(desc(Discussion.rating))
+            elif args['sort'] == 'popular_today':
+                items_query = items_query.order_by(desc(Discussion.today_rating))
+            else:
+                items_query = items_query.order_by(Discussion.created_at.desc())
 
-        total_items = items_query.count()
-        items_query = items_query.offset(items_per_page * (page_number - 1)).limit(items_per_page)
+            total_items = items_query.count()
+            items_query = items_query.offset(items_per_page * (page_number - 1)).limit(items_per_page)
 
         return Pagination(
             page=page_number,

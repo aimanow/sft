@@ -4,6 +4,7 @@ from flask import Flask
 from flask_migrate import Migrate
 
 from config import ConfigType
+from elasticsearch import Elasticsearch
 from app.api import api_blueprint
 from commands.superuser import superuser_cli
 
@@ -22,6 +23,10 @@ def register_commands(app):
 def app_factory(config_type: ConfigType):
     app = Flask(__name__)
     app.config.from_object(config_type.value)
+
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+        if app.config['ELASTICSEARCH_URL'] else None
+
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)

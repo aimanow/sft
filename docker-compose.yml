@@ -15,7 +15,7 @@ services:
       - SFT_CONFIG=prod
       - SCHEME=https
       - SECRET_KEY=nnZoFFARCoYgQmDdLGrawbCTUdBXUalcXBrONMjESnTXBDdFDPLyIiQUjHKtQBOAJUUEFZVGdYrHoOTSRYWiHdQPDmqRQEoUswuJ
-      - DATABASE_URI=postgresql://sft_backend:U1ZclW3JXdwO1p4W@sft.space:5432/sft_production
+      - DATABASE_URI=postgresql://postgres:BkNdYg5RZj@81.169.153.122:5432/sft_prod
       - UPLOAD_FOLDER=/home/sftadmin/sft/uploaded_files
       - MAIL_DEFAULT_SENDER=info@sft.space
       - MAIL_SERVER=smtp.strato.de
@@ -31,3 +31,41 @@ services:
       - "5000:5000"
     volumes:
       - ./src:/usr/src/app
+    networks:
+      - elastic
+
+  frontendapp:
+    container_name: frontendapp
+    build:
+      context: ./etc/docker/nginx
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src/front/dist:/var/www/html/public
+
+  es01:
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    build:
+      context: ./etc/docker/elasticsearch
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
