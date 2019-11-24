@@ -48,7 +48,7 @@ class DiscussionList(Resource):
             return abort(HTTPStatus.BAD_REQUEST, message="'page' must be > 0")
 
         if args['location'] == 'all' and args['q'] is not None:
-            Discussion.reindex()
+            # Discussion.reindex()
 
             items_query, total_items = Discussion.search(args['q'], int(page_number), items_per_page)
 
