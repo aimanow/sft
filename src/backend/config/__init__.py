@@ -25,7 +25,7 @@ class ConfigBase:
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'upload')
 
     FRONTEND_URL = 'http://localhost:8000/'
-    ELASTICSEARCH_URL = 'http://es01:9200'
+    ELASTICSEARCH_URL = 'http://es:9200'
     FRONTEND_EMAIL_CONFIRM_URL = '/email_confirmation'
     FRONTEND_PASSWORD_RESET_URL = '/password_reset'
 

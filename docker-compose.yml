@@ -7,27 +7,10 @@ services:
       context: ./etc/docker/python
     privileged: true
     command: bash -c "cd backend && bash run_backend.bash"
-    #stdin_open: true
-    #tty: true
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
-      - SFT_CONFIG=prod
-      - SCHEME=https
-      - SECRET_KEY=nnZoFFARCoYgQmDdLGrawbCTUdBXUalcXBrONMjESnTXBDdFDPLyIiQUjHKtQBOAJUUEFZVGdYrHoOTSRYWiHdQPDmqRQEoUswuJ
-      - DATABASE_URI=postgresql://postgres:BkNdYg5RZj@81.169.153.122:5432/sft_prod
-      - UPLOAD_FOLDER=/home/sftadmin/sft/uploaded_files
-      - MAIL_DEFAULT_SENDER=info@sft.space
-      - MAIL_SERVER=smtp.strato.de
-      - MAIL_PORT=465
-      - MAIL_USERNAME=info@sft.space
-      - MAIL_PASSWORD=Gron45Hu.2019
-      - MAIL_USE_SSL=True
-      - FRONTEND_URL=localhost
-      - FRONTEND_EMAIL_CONFIRM_URL=/confirm_email
-      - FRONTEND_PASSWORD_RESET_URL=/reset_password
     ports:
-      - "5001:5001"
       - "5000:5000"
     volumes:
       - ./src:/usr/src/app
@@ -41,22 +24,15 @@ services:
     environment:
       - NODE_ENV=development
     ports:
-      - "8000:8000"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./src/front/dist:/var/www/html/public
 
-  es01:
-    container_name: es01
+  es:
+    container_name: es
     environment:
-      - node.name=es01
-      - cluster.name=es-docker-cluster
-      - cluster.initial_master_nodes=es01
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      - discovery.type=single-node
     build:
       context: ./etc/docker/elasticsearch
     volumes:

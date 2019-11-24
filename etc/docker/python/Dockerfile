@@ -9,6 +9,7 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 RUN pip3 install --upgrade \
     gunicorn \
-    requests
+    requests \
+    python-dotenv
 
 WORKDIR /usr/src/app

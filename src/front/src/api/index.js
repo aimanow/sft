@@ -1,12 +1,12 @@
 import axios from 'axios'
-//const qs = require('qs')
+
 function Request () {
-  // TODO дописать зависимость baseURL от process.env.HOST & PORT
-  // const baseURL = process.env.NODE_ENV === 'production' ? 'http://sft.sliceplanet.ml/api/public' : 'http://localhost:5000/api/public'
-  const baseURL = 'https://sft-dev.tk/api/public'
+  const baseURL = 'http://localhost:5000/api/public'
   return axios.create({ baseURL, withCredentials: true })
-} //*
-let request = Request() //*
+}
+
+let request = Request();
+
 export function Login (data) {
   let form = new FormData()
   form.append('email', data.email)
