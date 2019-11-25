@@ -1,0 +1,96 @@
+body { font-size: 13px !important; }
+
+.form_cols { margin-left: -22px; margin-right: -22px; }
+
+.form_cols:after { content: ''; display: block; clear: both; }
+
+.form_cols_item { float: left; width: 50%; padding: 0 22px; }
+
+.section-feed .form_btn { margin-left: 0; text-align: center; }
+
+.section-feed .form_btn .btn { width: 204px; }
+
+/* */
+.posts_col { margin-right: 18px; }
+
+.posts_col .posts_item { width: auto; height: auto; }
+
+.post { font-size: 12px; }
+
+.post h2, .post h3, .post h4 { font-size: 16px; }
+
+.post-politics ol li { font-size: 13px; }
+
+.post-politics ol li li { font-size: 12px; }
+
+/* */
+.authors { margin: 10px -7px 35px; }
+
+.authors_item { padding: 10px 5px; height: 220px; width: 138px; margin: 7px; }
+
+.authors_item_img { width: 100px; height: 100px; margin: 0 auto 7px; }
+
+.authors_item_name { font-size: 13px; margin-bottom: 5px; }
+
+.authors_item_likes span { margin: -7px 5px 0 -16px; font-size: 14px; }
+
+.authors_item_info { margin: 9px 0px 0; height: 48px; }
+
+.authors_info_circ { margin: 2px 2px; width: 20px; line-height: 20px; height: 20px; font-size: 10px; }
+
+.authors_item .fav_link { right: 8px; top: 8px; font-size: 14px; }
+
+/* */
+.rewards { margin: 11px -18px 11px 0; }
+
+.rewards_item { -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); padding: 20px 20px 12px; margin: 0 18px 15px 0; min-width: 173px; width: 173px; height: 177px; }
+
+.rewards_item_ico { height: 84px; width: 84px; margin: 0 auto 17px; line-height: 84px; }
+
+.rewards_item_ico img { max-width: 61px; max-height: 63px; }
+
+.rewards_item_name { font-size: 13px; height: 36px; }
+
+.fields { padding: 7.7% 0% 5.7%; }
+
+.fields_item { padding: 12px; width: 140px; height: 140px; }
+
+.fields_item:before { top: 6px; left: 6px; right: 6px; bottom: 6px; }
+
+.fields_item_num { margin: -22.5px 0 0 -22.5px; font-size: 20px; border: 4px solid #FF441D; -webkit-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.22); box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.22); width: 45px; height: 45px; line-height: 37px; }
+
+.fields_item_txt { padding: 20px; font-size: 12px; }
+
+.fields_item_txt .icon-check { margin-bottom: 6px; font-size: 14px; }
+
+.fields_center_circ { padding: 15px; width: 150px; height: 150px; border: 10px solid #0560CE; }
+
+.fields_center_txt { font-size: 13px; }
+
+.fields_center_num { line-height: 100px; font-size: 68px; }
+
+.txt_exp { font-size: 11px; }
+
+/* */
+.tabs li a { height: 32px; line-height: 32px; -webkit-border-radius: 16px; border-radius: 16px; }
+
+.aspect-fav { margin: 21px -19px 21px 0; }
+
+.aspect_item { width: 134px; margin: 0 19px 19px 0; }
+
+.aspect_item .fav_link { top: 7px; right: 7px; font-size: 16px; }
+
+.aspect_item_text { font-size: 14px; bottom: 15px; }
+
+.aspect_item_text p { height: 28px; }
+
+.LK_form_block .form_row label { font-size: 11px; width: 130px; }
+
+.LK_form_block .form_btn { padding-left: 130px; }
+
+.LK_form_block .form_cols_item { margin-bottom: 0px; }
+
+/* */
+.w_thesis_files_file { margin-right: 10px; display: inline-block; vertical-align: top; width: auto; }
+
+/*# sourceMappingURL=tablet.css.map */
