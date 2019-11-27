@@ -7,12 +7,12 @@
         <div class="card_cont">
           <div class="card_verif"><span class="icon-check" v-if="profile.education.verification"></span>{{ $lang.profile[profile.education.verification ? 'confirm' : 'notConfirm'] }}</div>
           <table class="card_info">
-            <tr><th>{{$lang.profile.country}}:</th><td>{{ profile.education.country || 'Не заполнено' }}</td></tr>
-            <tr><th>{{$lang.profile.city}}:</th><td>{{ profile.education.city || 'Не заполнено' }}</td></tr>
-            <tr><th>{{$lang.profile.uni}}:</th><td>{{ profile.education.hight_school || 'Не заполнено' }}</td></tr>
-            <tr><th>{{$lang.profile.date}}:</th><td>{{ profile.education.date || 'Не заполнено' }}</td></tr>
-            <tr><th>{{$lang.profile.fuc}}:</th><td>{{ profile.education.faculty || 'Не заполнено' }}</td></tr>
-            <tr><th>{{$lang.profile.spec}}:</th><td>{{ profile.education.specialty || 'Не заполнено' }}</td></tr>
+            <tr><th>{{$lang.profile.country}}:</th><td>{{ profile.education.country || $lang.profile.empty }}</td></tr>
+            <tr><th>{{$lang.profile.city}}:</th><td>{{ profile.education.city || $lang.profile.empty }}</td></tr>
+            <tr><th>{{$lang.profile.uni}}:</th><td>{{ profile.education.hight_school || $lang.profile.empty }}</td></tr>
+            <tr><th>{{$lang.profile.date}}:</th><td>{{ profile.education.date || $lang.profile.empty }}</td></tr>
+            <tr><th>{{$lang.profile.fuc}}:</th><td>{{ profile.education.faculty || $lang.profile.empty }}</td></tr>
+            <tr><th>{{$lang.profile.spec}}:</th><td>{{ profile.education.specialty || $lang.profile.empty }}</td></tr>
           </table>
         </div>
       </div>
@@ -51,7 +51,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  name: "Profile",
+  name: 'Profile',
   methods: {
     ...mapActions('profile', ['getUserProfile', 'getUserRewards', 'getUserKnowledges']),
     ...mapActions('modal', ['addModal']),
@@ -74,7 +74,7 @@ export default {
     ...mapState('profile', ['profile', 'profile_rewards', 'profile_knowledge']),
 
     id() {
-      return this.$route.params.id;
+      return this.$route.params.id
     }
   },
 }

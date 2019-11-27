@@ -2,7 +2,8 @@
   <div class="center center_main-page">
     <section class="section-themes" id="theme-day">
       <div class="h2"><h2>{{$lang.main.dayTheme}}</h2></div>
-      <Slick
+      <component
+        :is="slickComp"
         ref="slick1"
         class="posts slider-posts"
         :options="postsSlickOptions">
@@ -10,12 +11,13 @@
           :key="item.id"
           v-for="item in discussionsLast"
           :item="item"
-          />
-      </Slick>
+        />
+      </component>
     </section>
     <section class="section-discuss" id="theme-disc-top">
       <div class="h2"><h2>{{$lang.main.discTheme}}</h2></div>
-      <Slick
+      <component
+        :is="slickComp"
         ref="slick2"
         class="posts posts-sm"
         :options="themesSlickOptions">
@@ -28,14 +30,14 @@
         <ThemeItem
           v-for="item in discussionsTop" :key="item.id"
           :item="item"
-          />
-      </Slick>
+        />
+      </component>
     </section>
     <section class="section-top-discuss m-show">
       <div class="h2"><h2>{{$lang.main.discTopTheme}}</h2></div>
       <div class="cloud">
         <!-- <a href="#" class="cloud_link"><span class="icon-point"></span>Планета Земля</a>
-        <a href="#" class="cloud_link"><span class="icon-point"></span>Космос</a>
+        <a href="#" class="cloud_link"><span class="icon-point"></span>{{$lang.filter.space}}</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Психология</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кулинария</a>
@@ -44,13 +46,13 @@
         <a href="#" class="cloud_link"><span class="icon-point"></span>Конфеты</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Планета Земля</a>
-        <a href="#" class="cloud_link"><span class="icon-point"></span>Космос</a>
+        <a href="#" class="cloud_link"><span class="icon-point"></span>{{$lang.filter.space}}</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Психология</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кулинария</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Животные</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кант</a> -->
-        <a href="#" class="cloud_link"  @click.prevent="allDiscusion()"><span class="icon-point"></span>Все</a>
+        <a href="#" class="cloud_link" @click.prevent="allDiscusion()"><span class="icon-point"></span>{{$lang.filter.allTitle}}</a>
       </div>
     </section>
     <section class="section-top-author" id="top-authors">
@@ -58,16 +60,17 @@
         <h2>{{$lang.main.topAuthors}}</h2>
         <div class="sort">
           <span>{{$lang.main.sort}}:</span>
-          <a href="#" class="sort_link sort_link1"><span class="icon-like"></span></a>
-          <a href="#" class="sort_link sort_link2"><span class="icon-comm"></span></a>
+          <a href="#" :class="sortTopUsers===1?'sort_link sort_link1':'sort_link sort_link2'" @click.prevent="sortTopUsers=1, getUsersTop(sortTopUsers)"><span class="icon-like"></span></a>
+          <a href="#" :class="sortTopUsers===1?'sort_link sort_link2':'sort_link sort_link1'" @click.prevent="sortTopUsers=0, getUsersTop(sortTopUsers)"><span class="icon-comm"></span></a>
         </div>
       </div>
-      <Slick
+      <component
+        :is="slickComp"
         ref="slick-3"
         class="authors slider-authors"
         :options="usersSlickOptions">
-        <UserItem v-for="author in usersTop" :key="author.id" :author="author" />
-      </Slick>
+        <UserItem v-for="author in usersTop" :key="author.id" :author="author"/>
+      </component>
     </section>
     <!-- <section class="section-revs">
       <div class="h2"><h2>{{$lang.main.reviews}}</h2></div>
@@ -122,10 +125,10 @@
                     </div>
                   </div> -->
                   <select class="jq-selectbox jqselect placeholder" v-model="feedbackTopic">
-                    <option disabled selected value="">Выберите один из вариантов</option>
-                    <option value="claim">claim</option>
-                    <option value="offer">offer</option>
-                    <option value="wish">wish</option>
+                    <option disabled selected value="">{{$lang.main.feedbackChoose}}</option>
+                    <option value="claim">{{$lang.main.feedbackClaim}}</option>
+                    <option value="offer">{{$lang.main.feedbackOffer}}</option>
+                    <option value="wish">{{$lang.main.feedbackWish}}</option>
                   </select>
                 </div>
               </div>
@@ -139,7 +142,9 @@
             <div class="form_cols_item">
               <div class="form_row form_capt">
                 <div class="form_el">
-                  <div class="capt_img"><vue-recaptcha sitekey="6LcG8W4UAAAAAKfUwS1VM07rakvrZT4cgxMGOQXS"/></div>
+                  <div class="capt_img">
+                    <vue-recaptcha sitekey="6LcG8W4UAAAAAKfUwS1VM07rakvrZT4cgxMGOQXS"/>
+                  </div>
                 </div>
               </div>
               <div class="file_cov">
@@ -162,7 +167,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import Slick from 'vue-slick'
 import PostItem from './PostItem'
 import ThemeItem from './ThemeItem'
 import UserItem from './UserItem'
@@ -170,18 +174,20 @@ import ReviewItem from './ReviewItem'
 import VueRecaptcha from 'vue-recaptcha'
 import slick from '@/components/mixins/slick'
 //import checkFavorites from '@/components/mixins/checkFavorites'
-let   feedbackFile = null;
+let feedbackFile = null
 export default {
   name: 'Main',
 
   mixins: [slick],
 
-  data () {
+  data() {
     return {
-      feedbackTopic: "",
-      feedbackEmail: "",
-      feedbackMessage: "",
-      feedbackName: "",
+      slickComp:'',
+      sortTopUsers: 1,
+      feedbackTopic: '',
+      feedbackEmail: '',
+      feedbackMessage: '',
+      feedbackName: '',
       postsSlickOptions: {
         infinity: false,
         dots: true,
@@ -295,8 +301,10 @@ export default {
     }
   },
 
-  components: { Slick, PostItem, ThemeItem, UserItem, //ReviewItem,
-     VueRecaptcha },
+  components: {
+    Slick: () => import('vue-slick'), PostItem, ThemeItem, UserItem, //ReviewItem,
+    VueRecaptcha
+  },
 
   computed: {
     ...mapState('discussion', ['discussionsTop', 'discussionsLast', 'removedFavDisc', 'removedFavAuthorDisc']),
@@ -306,39 +314,52 @@ export default {
   methods: {
     ...mapActions('discussion', ['getDiscussionsTop', 'getDiscussionsLast']),
     ...mapActions('profile', ['getUsersTop']),
-    allDiscusion(){
+    allDiscusion() {
       this.$router.push('/all')
     },
-    SubmitFeedback(){
-      let data = new FormData();
-      data.append("email", this.feedbackEmail)
-      data.append("name", this.feedbackName)
-      data.append("topic", this.feedbackTopic)
-      data.append("message", this.feedbackMessage)
-      if( feedbackFile !== null) {data.append("file", feedbackFile)}
-      this.$axios.post('/feedback', data,{
+    SubmitFeedback() {
+      let data = new FormData()
+      data.append('email', this.feedbackEmail)
+      data.append('name', this.feedbackName)
+      data.append('topic', this.feedbackTopic)
+      data.append('message', this.feedbackMessage)
+      if (feedbackFile !== null) {
+        data.append('file', feedbackFile)
+      }
+      this.$axios.post('/feedback', data, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
         }
-      }).then(res => {
-          this.$store.commit('openDialog', {type: 'success', message: res.data})
-      }).catch(err =>{
-        if (err.response){
-          this.$store.commit('openDialog', err.response.data)
-        }else { this.$store.commit('openDialog', err.message)}
+      }).then(() => {
+        this.$store.commit('openDialog', { type: 'success', message: this.$lang.main.feedbackSuccess })
+      }).catch(err => {
+        if (err.response) {
+          this.$store.commit('openDialog', this.$lang.main.feedbackError)
+        } else {
+          this.$store.commit('openDialog', this.$lang.main.feedbackError)
+        }
       })
     },
     processFile(e) {
       feedbackFile = e.target.files[0]
-   }
+    }
 
   },
 
-  mounted () {
-    if (this.discussionsLast.length == 0) { this.getDiscussionsLast() }
-    if (this.discussionsTop.length == 0) { this.getDiscussionsTop() }
-    if (this.usersTop.length == 0) { this.getUsersTop() }
+  mounted() {
+    this.$nextTick(function () {
+      this.slickComp = 'Slick'
+    })
+    if (this.discussionsLast.length === 0) {
+      this.getDiscussionsLast()
+    }
+    if (this.discussionsTop.length === 0) {
+      this.getDiscussionsTop()
+    }
+    if (this.usersTop.length === 0) {
+      this.getUsersTop()
+    }
 
   }
 
@@ -349,41 +370,46 @@ export default {
   .slick-slide {
     margin: 8px 12px 8px;
   }
-  .section-discuss .slick-slide{
-      margin: 8px 7px 8px
+
+  .section-discuss .slick-slide {
+    margin: 8px 7px 8px
   }
+
   .posts_item {
     text-align: left;
   }
 
-  .section-discuss .posts_item{
+  .section-discuss .posts_item {
     height: 310px;
   }
 
-   @media screen and (max-width: 1024px){
-     .section-discuss .posts_item{
-       height: 310px;
-     }
-   }
+  @media screen and (max-width: 1024px) {
+    .section-discuss .posts_item {
+      height: 310px;
+    }
+  }
 </style>
 
 <style scoped>
-  .posts_item{
-    margin-bottom:15px;
+  .posts_item {
+    margin-bottom: 15px;
 
   }
-  .section-discuss .posts_item_cont{
+
+  .section-discuss .posts_item_cont {
     margin-top: -35px;
   }
-    section {
-      text-align: center;
-    }
-    .form_capt {
-      margin-top: -105px;
-    }
 
-    .form_row {
-      margin-bottom: 66px;
-    }
+  section {
+    text-align: center;
+  }
+
+  .form_capt {
+    margin-top: -105px;
+  }
+
+  .form_row {
+    margin-bottom: 66px;
+  }
 
 </style>

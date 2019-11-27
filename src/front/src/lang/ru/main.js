@@ -1,7 +1,7 @@
 module.exports = {
   dayTheme: 'Тема дня',
   discTheme: 'Темы дискуссий',
-  discTopTheme:'Топ тем дискуссий',
+  discTopTheme: 'Топ тем дискуссий',
   topAuthors: 'Топ авторов',
   sort: 'Сортировать',
   reviews: 'Отзывы',
@@ -9,7 +9,8 @@ module.exports = {
   archiveDisc: 'Архив тем дискуссий',
   feedback: 'Обратная связь',
   add: 'Добавить дискуссиию',
-  
+  cancel: 'Отмена',
+
   edu: 'Образование',
   fav: 'Избранные темы',
   visited: 'Посещённые темы',
@@ -36,4 +37,17 @@ module.exports = {
   rules: 'Общие правила общения и терминология',
 
   faq: '',
+  accountCreate: 'Войти в личный кабинет',
+  favoriteAspects: 'Добавить аспекты в избранное',
+  feedbackChoose: 'Выберите один из вариантов',
+
+  feedbackClaim: 'Жалоба',
+  feedbackOffer: 'Предложение',
+  feedbackWish: 'Пожелание',
+  feedbackError:'Ошибка отправки сообщения',
+  feedbackSuccess:'Сообщение успешно отправлено',
+
+  emailValidationError:'Введите корректный Email',
+  forgotPasswordError:'Пользователь с таким Email не найден',
+  forgotPasswordSuccess:'Письмо с инструкцией успешно отправлено на указанный Email',
 }

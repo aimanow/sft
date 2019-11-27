@@ -37,27 +37,27 @@ export default {
       return this.deleted ? 'red' : ''
     },
     created_at(){
-      let created_at = this.item.created_at;
+      let created_at = this.item.created_at
       return created_at.slice(0, 10)
     }
   },
   methods: {
     cardEvent($event){
-      if($event.target.classList[0] == "v-icon"){
+      if($event.target.classList[0] == 'v-icon'){
         if($event.target.innerText == 'lock_open' || $event.target.innerText == 'lock'){
-          this.$emit("freeze-toggle", this.item.id)
+          this.$emit('freeze-toggle', this.item.id)
         }else if($event.target.innerText == 'delete'){
-            DeleteDiscussion(this.item.id).then(()=>{
-              this.deleted = true;
-            })
+          DeleteDiscussion(this.item.id).then(()=>{
+            this.deleted = true
+          })
         }
 
 
-        return;
+        return
       }
-      if($event.target.className == "icon-fav"){
+      if($event.target.className == 'icon-fav'){
         if(this.eventModel){
-            this.$emit("fav-toggle", this.item.id)
+          this.$emit('fav-toggle', this.item.id)
         }else{
           this.$store.dispatch('discussion/toggleDiscusionFav',this.item.id).then(disc =>{
             this.$store.commit('discussion/replaceDiscussionTop', {id : disc.id, is_favorite: disc.is_favorite})

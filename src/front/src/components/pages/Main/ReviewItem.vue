@@ -10,9 +10,9 @@
 </template>
 
 <script>
-    export default {
-        name: "ReviewItem"
-    }
+export default {
+  name: 'ReviewItem'
+}
 </script>
 
 <style scoped>

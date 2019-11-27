@@ -20,9 +20,9 @@
 </template>
 
 <script>
-  export default {
-    name: "TermsOfUse"
-  }
+export default {
+  name: 'TermsOfUse'
+}
 </script>
 
 <style scoped>

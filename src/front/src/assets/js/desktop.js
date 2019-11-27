@@ -2,7 +2,7 @@ $(window).on('load',function(){
 
 	
 
-});
+})
 
 
 

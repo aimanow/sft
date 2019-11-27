@@ -7,7 +7,7 @@
             <div class="disc_line_inf">
                 <div class="disc_line_name"><a href="#">{{discussion.title}}</a>
                 </div>
-                <div class="disc_line_athor"><span>Автор:</span> {{discussion.author.fullname}}</div>
+                <div class="disc_line_athor"><span>{{$lang.main.authorWrap}}:</span> {{discussion.author.fullname}}</div>
                 <div class="disc_line_date">{{discussion.created_at}}</div>
             </div>
             <div class="truefalse"><span>{{discussion.votes.true}}%</span><span>{{discussion.votes.false}}%</span></div>

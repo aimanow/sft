@@ -15,19 +15,33 @@ services:
     volumes:
       - ./src:/usr/src/app
     networks:
-      - elastic
+      - sft
 
-  frontendapp:
-    container_name: frontendapp
+  nginxapp:
+    container_name: nginxapp
     build:
       context: ./etc/docker/nginx
-    environment:
-      - NODE_ENV=development
     ports:
       - "80:80"
       - "443:443"
+    links:
+      - frontendtapp
+    networks:
+      - sft
+
+  frontendtapp:
+    container_name: frontendtapp
+    build:
+      context: ./etc/docker/nodejs
+    command: bash -c "chmod +x start.sh && ./start.sh"
+    environment:
+      - HOST=0.0.0.0
+    ports:
+      - "8000:8000"
     volumes:
-      - ./src/front/dist:/var/www/html/public
+      - ./src/front:/app
+    networks:
+      - sft
 
   es:
     container_name: es
@@ -40,8 +54,8 @@ services:
     ports:
       - "9200:9200"
     networks:
-      - elastic
+      - sft
 
 networks:
-  elastic:
+  sft:
     driver: bridge

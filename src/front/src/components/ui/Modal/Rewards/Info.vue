@@ -15,14 +15,14 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  export default {
-    name: "rewardInfo",
-    props: ['modal'],
-    methods:{
-      ...mapMutations('modal', ['closeAllModal']),
-    }
+import { mapMutations } from 'vuex'
+export default {
+  name: 'rewardInfo',
+  props: ['modal'],
+  methods:{
+    ...mapMutations('modal', ['closeAllModal']),
   }
+}
 </script>
 
 <style scoped>

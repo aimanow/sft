@@ -15,10 +15,10 @@ export default {
     ...mapState('profile', ['all_aspects']),
     favorite_aspects(){
       if(this.all_aspects.length){
-        let arr = [];
+        let arr = []
         this.all_aspects.forEach(page=>{
           arr = arr.concat(page.items)
-        });
+        })
         return arr.filter(aspect=>{ return aspect.is_favorite === true})
       }else{return []}
 

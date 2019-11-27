@@ -9,7 +9,7 @@
 <script>
 import {mapActions} from 'vuex'
 export default {
-  name: "Reward",
+  name: 'Reward',
   props: ['data'],
   methods: {
     ...mapActions('modal', ['addModal']),

@@ -1,14 +1,15 @@
 <template>
   <div class="edu_block_wrap">
     <div v-if="!thesis">
-      <div class="w_thesis_title">Мои аспекты</div>
-      <Slick  ref="slick" :options="SlickOptions" class="text-xs-center">
+      <div class="w_thesis_title">{{$lang.descAdd.aspects}}</div>
+      <component
+        :is="slickComp" ref="slick" :options="SlickOptions" class="text-xs-center">
         <aspectItem
           v-for="item in all_aspects" :count="aspectsCount"
           :key="item.id"
           :item="item" @checkedAspect="checkedAspect" @checkOffAspect="checkOffAspect" :small="true"
-          />
-      </Slick>
+        />
+      </component>
       <!-- <div class="aspect_item aspect_item_plus">
         <a href="#" @click.prevent="addModal({name: 'DiscussionAddAspects', data: 'openModalArgument'})">
           <div class="aspect_item_add">
@@ -40,7 +41,7 @@
           class="w_thesis_link_line"
           v-for="(link, index) in form.links"
           :key="index"
-          >
+        >
           <input type="text" class="t-inp" :value="link" readonly/>
           <a href="#" class="w-close-link" @click.prevent="removeLink(index)"><span class="icon-cab7"></span></a>
         </div>
@@ -57,11 +58,14 @@
     <div class="win_pos">
       <div class="w_thesis_title">{{$lang.descAdd.position}}</div>
       <div class="w_pos_links">
-        <a href="#" :class="{'active': form.position == true}" @click.prevent="form.position = true" class="w_pos_links_link w_pos_links_link1">{{$lang.descAdd.yes}}</a>
-        <a href="#" :class="{'active': form.position == false}" @click.prevent="form.position = false" class="w_pos_links_link w_pos_links_link2">{{$lang.descAdd.no}}</a>
+        <a href="#" :class="{'active': form.position == true}" @click.prevent="form.position = true"
+           class="w_pos_links_link w_pos_links_link1">{{$lang.descAdd.yes}}</a>
+        <a href="#" :class="{'active': form.position == false}" @click.prevent="form.position = false"
+           class="w_pos_links_link w_pos_links_link2">{{$lang.descAdd.no}}</a>
       </div>
     </div>
-    <div class="text-xs-center text-md-left mt-4"><input @click.prevent="sendForm" type="submit" class="btn btn-bot" :value="$lang.descAdd.publish"/></div>
+    <div class="text-xs-center text-md-left mt-4"><input @click.prevent="sendForm" type="submit" class="btn btn-bot"
+                                                         :value="$lang.descAdd.publish"/></div>
   </div>
 </template>
 
@@ -69,21 +73,30 @@
 //import aspectItem from './aspectItem' './Item'
 import aspectItem from '@/components/pages/Discussion/Add/Item'
 import { mapMutations, mapState, mapActions } from 'vuex'
-import {PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAllAspects} from '@/api'
-import Slick from 'vue-slick'
+import { PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAllAspects } from '@/api'
+// import Slick from 'vue-slick'
+
 export default {
   name: 'Argument',
-  components: { aspectItem, Slick },
-  props:{
+  components: {
+    aspectItem,
+    Slick: () => import('vue-slick')
+  },
+  props: {
     thesis: Boolean,
     id: null
   },
-
-  data () {
+  mounted(){
+    this.$nextTick(function () {
+      this.slickComp = 'Slick'
+    })
+  },
+  data() {
     return {
+      slickComp: '',
       form: {
-        thesis: "",
-        argument: "",
+        thesis: '',
+        argument: '',
         position: null,
         links: [],
         files: []
@@ -117,7 +130,7 @@ export default {
     ...mapState('auth', ['auth']),
     ...mapState('discussion', ['current_discussion', 'discussion_aspects']),
     //...mapState('profile', ['all_aspects']),
-    all_aspects(){
+    all_aspects() {
       return this.localAspects.concat(this.discussion_aspects)
     },
     // favorite_aspects(){
@@ -141,89 +154,95 @@ export default {
     // addAspectId(id){
     //   this.aspect_ids.push(id)
     // },
-    checkedAspect(id){
-      this.aspectsCount = this.aspectsCount + 1;
-      this.aspect_ids.push(id);
+    checkedAspect(id) {
+      this.aspectsCount = this.aspectsCount + 1
+      this.aspect_ids.push(id)
     },
-    checkOffAspect(id){
-      this.aspectsCount = this.aspectsCount - 1;
-      this.aspect_ids.find((item, index)=>{
-        if(item == id) this.aspect_ids.splice(index, 1)
+    checkOffAspect(id) {
+      this.aspectsCount = this.aspectsCount - 1
+      this.aspect_ids.find((item, index) => {
+        if (item == id) this.aspect_ids.splice(index, 1)
       })
     },
-    sendForm(){
+    sendForm() {
       let form = {
-          "title": this.form.argument,
-          "aspect_ids": this.aspect_ids,
-          "thesis": {
-            "position": this.form.position,
-            "message": this.form.thesis
-          }
+        'title': this.form.argument,
+        'aspect_ids': this.aspect_ids,
+        'thesis': {
+          'position': this.form.position,
+          'message': this.form.thesis
         }
-      if(this.thesis){
-        PostDiscussionThesis({id: this.id, form:{position: this.form.position, message: this.form.thesis}})
-          .then(res =>{
-            let myThesis = res.data;
-            if(this.form.files.length){
-              AddThesisFile({id: myThesis.id, file: this.form.files})
+      }
+      if (this.thesis) {
+        PostDiscussionThesis({ id: this.id, form: { position: this.form.position, message: this.form.thesis } })
+          .then(res => {
+            let myThesis = res.data
+            if (this.form.files.length) {
+              AddThesisFile({ id: myThesis.id, file: this.form.files })
             }
-            if(this.form.links.length){
-              AddThesisLink({id: myThesis.id, link: this.form.links})
+            if (this.form.links.length) {
+              AddThesisLink({ id: myThesis.id, link: this.form.links })
             }
-            this.pushDiscussionThesis({thesis: myThesis, id: this.id})
+            this.pushDiscussionThesis({ thesis: myThesis, id: this.id })
             this.closeAllModal()
           })
-      }else{
-        if(this.form.thesis.length<10 && this.form.argument.length<10){
-            this.$store.commit('openDialog', "Please check filds thesis and arguments the filds must have at least 10 characters long"); return false}
-        if(this.aspectsCount === 0){
-          this.$store.commit('openDialog', "Please check Aspects 'Only maximum three aspects can be chosen'"); return false}
-        if(this.form.position === null){
-            this.$store.commit('openDialog', "Please check Yes or No");return false}
+      } else {
+        if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
+          this.$store.commit('openDialog', 'Please check filds thesis and arguments the filds must have at least 10 characters long')
+          return false
+        }
+        if (this.aspectsCount === 0) {
+          this.$store.commit('openDialog', 'Please check Aspects \'Only maximum three aspects can be chosen\'')
+          return false
+        }
+        if (this.form.position === null) {
+          this.$store.commit('openDialog', 'Please check Yes or No')
+          return false
+        }
 
-        PostDiscussionArgements({id: this.$route.params.id, form }).then((res)=>{
-            let myArg = res.data;
-            if(this.form.files.length){
-              AddThesisFile({id: myArg.thesis.id, file: this.form.files})
-            }
-            if(this.form.links.length){
-              AddThesisLink({id: myArg.thesis.id, link: this.form.links})
-            }
-            this.pushDiscussionArgument(myArg)
-            this.closeAllModal()
+        PostDiscussionArgements({ id: this.$route.params.id, form }).then((res) => {
+          let myArg = res.data
+          if (this.form.files.length) {
+            AddThesisFile({ id: myArg.thesis.id, file: this.form.files })
+          }
+          if (this.form.links.length) {
+            AddThesisLink({ id: myArg.thesis.id, link: this.form.links })
+          }
+          this.pushDiscussionArgument(myArg)
+          this.closeAllModal()
 
-          })
+        })
       }
     },
-    selectFiles (e) {
-      if(this.form.files.length <= 1 && e.target.files.length == 1){
+    selectFiles(e) {
+      if (this.form.files.length <= 1 && e.target.files.length == 1) {
         this.form.files.push(e.target.files[0])
 
-      }else{
-        let files = e.target.files;
-        let filesArray = [];
+      } else {
+        let files = e.target.files
+        let filesArray = []
         for (let i = 0; i < files.length; i++) {
-            filesArray[i] = files.item(i);
+          filesArray[i] = files.item(i)
         }
         if (filesArray.length > 2) {
           alert('Max 2 files')
           this.form.files = filesArray.splice(1)
-        }else{
+        } else {
           this.form.files = filesArray
         }
       }
 
     },
-    removeLink (index) {
+    removeLink(index) {
       this.form.links.splice(index, 1)
     },
-    addLink () {
+    addLink() {
       let link = prompt('Enter link')
       if (link.length > 0) {
         this.form.links.push(link)
       }
     },
-    addFiles () {
+    addFiles() {
       this.$refs.files.click()
     },
     removeFile(key) {
@@ -232,8 +251,8 @@ export default {
 
   },
 
-  created () {
-    this.localAspects = this.current_discussion.aspects;
+  created() {
+    this.localAspects = this.current_discussion.aspects
     // GetAllAspects().then(res =>{
     //   let  asp = res.data.items;
     //   console.log(asp );
@@ -250,10 +269,11 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  .aspect_item{
+  .aspect_item {
     float: none;
     display: inline-block;
   }
+
   .btn-holder {
     display: block;
     position: absolute;
@@ -262,6 +282,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
+
   .btn-holder:before {
     content: '';
     display: block;
@@ -272,20 +293,22 @@ export default {
     margin-left: -8.5px;
     margin-top: -3px;
   }
+
   .btn-holder .btn-bot {
     bottom: 0;
     width: 100%;
   }
 
-  .w_pos_links_link1{
-    &.active, &:hover{
-      background: linear-gradient(45deg, rgba(5,96,206,1) 0%, rgba(2,156,231,1) 100%);
+  .w_pos_links_link1 {
+    &.active, &:hover {
+      background: linear-gradient(45deg, rgba(5, 96, 206, 1) 0%, rgba(2, 156, 231, 1) 100%);
       color: white;
     }
   }
-  .w_pos_links_link2{
-    &.active, &:hover{
-      background: linear-gradient(45deg, rgba(227,20,10,1) 0%, rgba(236,63,81,1) 100%);
+
+  .w_pos_links_link2 {
+    &.active, &:hover {
+      background: linear-gradient(45deg, rgba(227, 20, 10, 1) 0%, rgba(236, 63, 81, 1) 100%);
       color: white;
     }
   }

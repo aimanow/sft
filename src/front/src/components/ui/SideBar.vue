@@ -5,7 +5,7 @@
       <div @click="openLoginModal" v-if="!auth.id" class="cab_top">
         <a href="#" class="cab_top_create">
           <div class="cab_top_icon"><span class="icon-user"></span></div>
-          <div class="cab_top_txt">Создать личный кабинет</div>
+          <div class="cab_top_txt">{{$lang.main.accountCreate}}</div>
         </a>
       </div>
 
@@ -14,7 +14,7 @@
           <span class="icon-settings"></span>
         </router-link>
 
-        <router-link :to="'/profile/' + auth.id" class="cab_top_prof">
+        <a href="#" class="cab_top_prof" @click.prevent="openUserMenu()">
           <div class="cab_top_icon">
             <img v-if="auth.avatar_url" :src="$baseUrl+auth.avatar_url" :key="renderKeyAvatar" :alt="auth.fullname" style="border-radius: 50%;">
             <span v-else class="icon-user"></span>
@@ -23,7 +23,7 @@
             <div class="cab_top_name">{{auth.fullname}}</div>
             <div class="cab_top_mail">{{auth.email}}</div>
           </div>
-        </router-link>
+        </a>
         <a href="#" class="cab_top_opener" @click.prevent="openUserMenu()"></a>
       </div>
       <div class="cab_drop" v-show="userMenuOpened">
@@ -53,10 +53,10 @@
       </div>
     </div>
     <div class="sidebar-themes m-hid">
-      <div class="add_link"  @click.prevent="toggle">
+      <div class="add_link" @click.prevent="toggle" v-if="auth.id">
         <div class="circ_grad"><span class="icon-plus" ></span></div>
         <span v-if="discussionButton" >{{$lang.main.add}}</span>
-        <span v-else>cancel</span>
+        <span v-else>{{$lang.main.cancel}}</span>
       </div>
       <ul class="sidebar-themes_list">
         <li>
@@ -83,7 +83,7 @@
       <h3>{{$lang.main.discTopTheme}}</h3>
       <div class="cloud">
         <!-- <a href="#" class="cloud_link"><span class="icon-point"></span>Планета Земля</a>
-        <a href="#" class="cloud_link"><span class="icon-point"></span>Космос</a>
+        <a href="#" class="cloud_link"><span class="icon-point"></span>{{$lang.filter.space}}</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Психология</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кулинария</a>
@@ -92,13 +92,13 @@
         <a href="#" class="cloud_link"><span class="icon-point"></span>Конфеты</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Планета Земля</a>
-        <a href="#" class="cloud_link"><span class="icon-point"></span>Космос</a>
+        <a href="#" class="cloud_link"><span class="icon-point"></span>{{$lang.filter.space}}</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Психология</a>
 
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кулинария</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Животные</a>
         <a href="#" class="cloud_link"><span class="icon-point"></span>Кант</a> -->
-        <a href="#" class="cloud_link" @click.prevent="allDiscusion()" ><span class="icon-point"></span>Все</a>
+        <a href="#" class="cloud_link" @click.prevent="allDiscusion()" ><span class="icon-point"></span>{{$lang.filter.allTitle}}</a>
       </div>
     </section>
   </aside>

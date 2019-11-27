@@ -7,6 +7,7 @@ module.exports = {
   date: 'Date',
   fuc: 'Faculty',
   spec: 'Specialty',
+  confirmData: 'Confirm data',
 
   edit: 'Edit',
 
@@ -15,12 +16,16 @@ module.exports = {
 
   tech: 'Technical Sciences',
   gum: 'Humanities',
+  nat: 'Natural Sciences',
 
   eduTitle: 'Education',
   favTitle: 'Selected topics',
   favAsp: 'Aspects',
   favDisc: 'Discussions',
   favAvt: 'Authors',
+
+  empty: 'Not completed',
+  clear: 'Clear',
 
 
   hisThemeTitle: 'Topics visited',

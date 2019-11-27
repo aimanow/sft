@@ -12,5 +12,17 @@ module.exports = {
   rePassword: 're-Password',
   sendEmail: 'Email',
   backTo: 'Come back to ',
-  reg: 'Registrations'
+  reg: 'Registrations',
+
+  voteLogin:'You can\'t set vote, please login first',
+
+  recoveryPassword:'Password recovery',
+  recoveryPass:'Save',
+
+  oauthGoogle:'Google Authorization',
+  oauthVK:'VKontakte Authorization',
+  oauthFacebook:'Facebook Authorization',
+
+  recoveryPasswordSuccess:'Password recovered successfully',
+  recoveryPasswordError:'Error password recovered'
 }

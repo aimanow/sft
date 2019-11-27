@@ -9,6 +9,7 @@ module.exports = {
   archiveDisc: 'Discussion discussion archive',
   feedback: 'Feedback',
   add: 'Add discussion topics',
+  cancel: 'Cancel',
 
   edu: 'Education',
   fav: 'Selected topics',
@@ -35,4 +36,19 @@ module.exports = {
 
   terms: 'Privacy Policy',
   rules: 'General rules of communication and terminology',
+
+  accountCreate: 'Login to account',
+  favoriteAspects: 'Add Aspects to Favorites',
+  feedbackChoose: 'Choose one of the options',
+
+  feedbackClaim: 'Claim',
+  feedbackOffer: 'Offer',
+  feedbackWish: 'Wish',
+
+  feedbackError:'Error sent feedback',
+  feedbackSuccess:'Feedback successfully sent',
+
+  emailValidationError:'Geben Sie eine gültige E-Mail-Adresse ein',
+  forgotPasswordError:'Benutzer mit dieser E-Mail wurde nicht gefunden',
+  forgotPasswordSuccess:'Ein Anweisungsschreiben wurde erfolgreich an die angegebene E-Mail gesendet',
 }

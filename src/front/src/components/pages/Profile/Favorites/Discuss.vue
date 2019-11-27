@@ -24,14 +24,14 @@
         <div class="filter_block" v-show="isOpenFilter">
           <div class="filter_block_top">
 
-            <div class="filter_block_res_title">Выберите нужные пункты:</div>
+            <div class="filter_block_res_title">{{$lang.filter.points}}:</div>
 
             <div class="filter_block_rads rads">
 
               <div class="rads_item">
                 <label class="radio">
                   <input type="checkbox" v-model="filter.by_date">
-                  <span class="radio_text">По дате <img src="@/assets/svg/arrs.svg" alt=""/></span>
+                  <span class="radio_text">{{$lang.filter.byDate}} <img src="@/assets/svg/arrs.svg" alt=""/></span>
                 </label>
               </div>
 
@@ -59,7 +59,7 @@
               <div class="rads_item">
                 <label class="radio">
                   <input type="checkbox" v-model="filter.by_score">
-                  <span class="radio_text">По популярности</span>
+                  <span class="radio_text">{{$lang.filter.byPop}}</span>
                 </label>
               </div>
 
@@ -67,7 +67,7 @@
           </div>
 
           <div class="filter_block_res">
-            <div class="filter_block_res_title">По аспектам:</div>
+            <div class="filter_block_res_title">{{$lang.filter.byAspects}}:</div>
             <div class="aspect aspect-check aspect-gr">
 
               <div class="aspect_item"
@@ -135,7 +135,7 @@ export default {
   methods: {
     ...mapActions('profile', ['getFavoritesDiscussion']),
     remove(id){
-      this.$emit("removeDisc", id)
+      this.$emit('removeDisc', id)
     }
   },
 

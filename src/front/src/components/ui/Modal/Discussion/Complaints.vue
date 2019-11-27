@@ -46,9 +46,9 @@
 </template>
 
 <script>
-    export default {
-        name: "Complaints"
-    }
+export default {
+  name: 'Complaints'
+}
 </script>
 
 <style scoped>

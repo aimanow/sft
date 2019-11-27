@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <div class="h2 mb-5"><h1>Добавить аспекты в избранное</h1></div>
+    <div class="h2 mb-5"><h1>{{$lang.main.favoriteAspects}}</h1></div>
       <div class="aspect aspect-fav" >
         <Item v-for="item in itemsPerPage" :key="item.id" :item="item" @toggle1="Update"/>
       </div>
@@ -38,7 +38,7 @@ export default {
     },
     fetchAspects(){
       this.GetAllAspects(this.page).then(()=>{
-        let item = this.all_aspects.find(item => item.page === this.page);
+        let item = this.all_aspects.find(item => item.page === this.page)
         this.itemsPerPage = item.items
       })
     },

@@ -18,7 +18,7 @@
 import DiscussionCard from '@/components/pages/Main/ThemeItem'
 import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
-  name: "Author",
+  name: 'Author',
   data() {
     return {
       showFilter: false,
@@ -39,13 +39,13 @@ export default {
     ...mapMutations('authors',['clereAuthorsDiscussions']),
     fetchDiscussions(){
       this.getAuthorDiscussions({id: this.$route.params.id, page: this.page}).then(()=>{
-        let item = this.authors_discussion.find(item => item.page === this.page);
+        let item = this.authors_discussion.find(item => item.page === this.page)
         this.itemsPerPage = item.items
       })
     },
   },
   mounted(){
-    this.clereAuthorsDiscussions();
+    this.clereAuthorsDiscussions()
     if (this.authors_discussion.length == 0) {
       this.getAuthorDiscussions({id: this.$route.params.id, page: this.page}).then(res =>{
         this.total_pages = res.total_pages

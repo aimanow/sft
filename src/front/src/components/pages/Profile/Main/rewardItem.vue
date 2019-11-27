@@ -7,14 +7,14 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  export default {
-    name: "Header",
-    props: ['info'],
-    methods: {
-      ...mapActions('modal', ['addModal']),
-    }
+import {mapActions} from 'vuex'
+export default {
+  name: 'Header',
+  props: ['info'],
+  methods: {
+    ...mapActions('modal', ['addModal']),
   }
+}
 </script>
 
 <style scoped>

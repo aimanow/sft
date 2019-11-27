@@ -35,7 +35,7 @@ export default {
     this.getUserRewards(this.auth.id)
   },
 
-  name: "Rewards"
+  name: 'Rewards'
 }
 </script>
 

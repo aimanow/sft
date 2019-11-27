@@ -1,13 +1,13 @@
 <template>
   <div class="center">
     <section class="section-form">
-    <div class="h2 m-hid"><h1>{{ $lang.profile.knowTitle }}</h1></div>
+      <div class="h2 m-hid"><h1>{{ $lang.profile.knowTitle }}</h1></div>
       <div class="fields-vis" style="height: 750px;">
         <div class="fields_center">
           <div class="fields_center_circ">
             <div class="fields_center_ava"><img v-if="profile.avatar_url" :src="$baseUrl+profile.avatar_url" alt="foto"></div>
           </div>
-          <div class="fields_center_name">{{  profile.fullname  }}</div>
+          <div class="fields_center_name">{{ profile.fullname }}</div>
           <router-link to="/profile/areas-of-knowledge/edit" class="btn btn-bord-blue">{{$lang.profile.edit}}</router-link>
         </div>
 
@@ -33,12 +33,12 @@
               ></circle-slider>
               <!-- <div class="fields_item_num" style="left: 94%; top: 39%;">{{ item.score }}</div> -->
               <div class="fields_item_img"><img :src="item.knowledge.image" alt=""></div>
-              <div class="fields_item_txt" >
-              <span class="icon-check" v-if="item.score > 0"></span>
-                <p>{{ item.knowledge }}</p>
+              <div class="fields_item_txt">
+                <span class="icon-check" v-if="item.score > 0"></span>
+                <p>{{ $lang.profile[item.knowledge] }}</p>
               </div>
             </div>
-        </div>
+          </div>
 
         </div>
       </div>
@@ -50,43 +50,44 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import circleSlider from '@/components/ui/CircleSlider/components/CircleSlider.vue'
+
 export default {
   name: 'MainAriasOfKnowledge',
-  data(){
-    return{
-       profile_knowledge:[
-         {
-           knowledge: "Гуманитарные науки",
-           image: '',
-           score: 10
-         },
-         {
-           knowledge: "Техныческие науки",
-           image: '',
-           score: 15
-         },
-         {
-           knowledge: "Гуманитарные науки",
-           image: '',
-           score: 5
-         },
+  data() {
+    return {
+      profile_knowledge: [
+        {
+          knowledge: 'gum',
+          image: '',
+          score: 0
+        },
+        {
+          knowledge: 'tech',
+          image: '',
+          score: 0
+        },
+        {
+          knowledge: 'nat',
+          image: '',
+          score: 0
+        },
 
-       ]
+      ]
     }
   },
-  components:{circleSlider},
+  components: { circleSlider },
   computed: {
     ...mapState('auth', ['auth']),
     ...mapState('profile', ['profile_current']),
-    profile(){
+    profile() {
       return this.profile_current
     },
   },
 
   methods: {
     ...mapActions('profile', ['getCurrentProfile']),
-    async fetchProfile () {
-      if(this.auth){
+    async fetchProfile() {
+      if (this.auth) {
         await this.getCurrentProfile()
         //await this.getUserKnowledges(this.auth.id)
       }
@@ -94,32 +95,35 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.fetchProfile()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .fields{
+  .fields {
 
-    &_col{
+    &_col {
       flex-basis: 50%;
       justify-content: center;
 
     }
   }
 
-  .fields_center{
+  .fields_center {
     bottom: none;
     top: 265px;
   }
+
   .fields_item {
     background-color: transparent;
+
     &:before {
       display: none;
     }
   }
+
   .slider-circle__item {
     position: absolute;
     top: 50%;

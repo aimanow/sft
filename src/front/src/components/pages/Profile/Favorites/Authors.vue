@@ -21,7 +21,7 @@ export default {
   },
   components:{UserItem},
   methods: {
-  ...mapActions('profile', ['getFavoritesDiscussionAuthors', 'toggleDiscusionAuthorFav']),
+    ...mapActions('profile', ['getFavoritesDiscussionAuthors', 'toggleDiscusionAuthorFav']),
     deleteFavorites (id) {
       this.toggleDiscusionAuthorFav(id).then((res) =>{
         this.$emit('removeAuthor', id)

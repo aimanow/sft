@@ -26,7 +26,7 @@
         <div class="country_title">{{$lang.descAdd.arg}}:</div>
         <div class="disc">
           <Argument v-for="(argument, index) in filterArgument" :argument="argument" :key="`argument_${index}`" :propThesis="thesis" :is_frozen=" discussion.is_frozen"/>
-          <div v-if="$store.state.auth.auth.id && !discussion.is_frozen" class="disc_line_plus" @click.prevent="addModal({name: 'ModalArgument'})"><a href="#"><span class="icon-plus"></span><span>Add</span></a></div>
+          <div v-if="$store.state.auth.auth.id && !discussion.is_frozen" class="disc_line_plus" @click.prevent="addModal({name: 'ModalArgument'})"><a href="#"><span class="icon-plus"></span><span>{{$lang.descAdd.addNew}}</span></a></div>
         </div>
       </div>
     </section>
@@ -76,10 +76,10 @@ export default {
       if(this.selected_aspects.length == 0){
         return this.discussion_arguments
       }else{
-        let arr = [];
+        let arr = []
         this.discussion_arguments.forEach(arg =>{
-          let res;
-          let aspect_ids = arg.aspect_ids;
+          let res
+          let aspect_ids = arg.aspect_ids
           aspect_ids.some(item =>{
             this.selected_aspects.forEach(selected_aspect =>{
               if (selected_aspect == item) res = true
@@ -104,22 +104,24 @@ export default {
         return 174
       } else {return 150}
     }
-},
+  },
 
   methods: {
     ...mapActions('modal', ['addModal']),
     ...mapActions('discussion', ['getDiscussionArguments']),
     handleResize() {
-      this.window.width = window.innerWidth;
+      if (process.client) {
+        this.window.width = window.innerWidth
+      }
     },
     toggleFreeze(id){
       ToggleDiscusionFreeze(id).then(res=>{
-      this.discussion.is_frozen = res.data.is_frozen
+        this.discussion.is_frozen = res.data.is_frozen
       })
     },
     deleteDiscussion(id){
       DeleteDiscussion(id).then(()=>{
-        this.deleted = true;
+        this.deleted = true
       })
     },
     async fetch () {
@@ -127,7 +129,7 @@ export default {
         this.getDiscussionArguments(this.$route.params.id),
         GetCurrentDiscussions(this.$route.params.id).then(res => {
           this.discussion = res.data
-            this.$store.commit('discussion/setCurrentDiscussion', res.data)
+          this.$store.commit('discussion/setCurrentDiscussion', res.data)
         }),
       ])
     }
@@ -137,20 +139,24 @@ export default {
     this.$store.subscribe((mutation, state)=>{
       switch(mutation.type){
         case 'discussion/pushDiscussionThesis': {
-          const status = state.discussion.argument_thesis;
-          this.thesis = status;
-          break;
+          const status = state.discussion.argument_thesis
+          this.thesis = status
+          break
         }
       }
-    });
+    })
   },
   created() {
     this.fetch()
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize();
+    if (process.client) {
+      window.addEventListener('resize', this.handleResize)
+    }
+    this.handleResize()
   },
   destroyed() {
-    window.removeEventListener('resize', this.handleResize)
+    if (process.client) {
+      window.removeEventListener('resize', this.handleResize)
+    }
   },
   watch:{
     '$route.params.id': function (id) {

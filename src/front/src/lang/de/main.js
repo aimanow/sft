@@ -1,7 +1,7 @@
-  module.exports = {
+module.exports = {
   dayTheme: 'Thema des Tages',
   discTheme: 'Diskussionsthemen',
-  discTopTheme:'Top Diskussionsthemen',
+  discTopTheme: 'Top Diskussionsthemen',
   topAuthors: 'Top-Autoren',
   sort: 'Sortieren',
   reviews: 'Bewertungen',
@@ -9,6 +9,7 @@
   archiveDisc: 'Diskussion Diskussionsarchiv',
   feedback: 'Rückmeldung',
   add: 'Diskussionsthemen hinzufügen',
+  cancel: 'Abbrechen',
 
   edu: 'Bildung',
   fav: 'Ausgewählte Themen',
@@ -23,16 +24,31 @@
   authorWrap: 'Autor',
 
   feedTitle: 'Feedback',
-  feedSubtitle: "Hinterlasse deine Nachricht in diesem Formular und wir werden es per E-Mail erhalten und werden definitiv antworten!",
+  feedSubtitle: 'Hinterlasse deine Nachricht in diesem Formular und wir werden es per E-Mail erhalten und werden definitiv antworten!',
   feedName: 'dein Name',
   feedEmpty: 'Noch nichts ausgewählt',
   feedEmail: 'Ihre E-Mail',
   feedAttach: 'Datei hinzufügen',
   feedCode: 'Gib den Code ein',
-  feedTheme: "Betreff",
+  feedTheme: 'Betreff',
   feedMessage: 'Post',
   feedSend: 'Submit',
 
-  terms: "Datenschutz",
-  rules: "Allgemeine Regeln der Kommunikation und Terminologie",
+  terms: 'Datenschutz',
+  rules: 'Allgemeine Regeln der Kommunikation und Terminologie',
+
+  accountCreate: 'Zum Konto anmelden',
+  favoriteAspects: 'Aspekte zu Favoriten hinzufügen',
+  feedbackChoose: 'Choose one of the options',
+
+  feedbackClaim: 'Beschwerde',
+  feedbackOffer: 'Angebot',
+  feedbackWish: 'Wünschen',
+
+  feedbackError: 'Fehler beim Senden des Feedbacks',
+  feedbackSuccess: 'Feedback erfolgreich gesendet',
+
+  emailValidationError:'Введите корректный Email',
+  forgotPasswordError:'Пользователь с таким Email не найден',
+  forgotPasswordSuccess:'Письмо с инструкцией успешно отправлено на указанный Email',
 }

@@ -14,17 +14,17 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  export default {
-    name: "Logout",
+import {mapActions} from 'vuex'
+export default {
+  name: 'Logout',
 
-    methods: {
-      ...mapActions('auth', ['logout']),
-      Logout(){
-        this.logout()
-      }
+  methods: {
+    ...mapActions('auth', ['logout']),
+    Logout(){
+      this.logout()
     }
   }
+}
 </script>
 
 <style scoped>

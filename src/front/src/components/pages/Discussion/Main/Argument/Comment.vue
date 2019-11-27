@@ -5,18 +5,19 @@
       <div class="comm_block">
         <div class="comm_block_bord">
           <div class="comm_img">
-            <scale :x="comment.votes.mean_x" :y="comment.votes.mean_y"  @click.native="setScale" />
+            <scale :x="comment.votes.mean_x" :y="comment.votes.mean_y" @click.native="setScale"/>
           </div>
           <div class="comm_cont">
             <div class="comm_txt">{{comment.message}}.</div>
-            <div  class="comm_adds" :class="{'open': toggle}">
-              <div class="comm_adds_opener" v-if="comment.attachments.length" @click="showMore">Приложения<span class="icon-arrow_down"></span></div>
+            <div class="comm_adds" :class="{'open': toggle}">
+              <div class="comm_adds_opener" v-if="comment.attachments.length" @click="showMore">{{$lang.descAdd.attachments}}<span
+                class="icon-arrow_down"></span></div>
               <div class="comm_adds_drop">
                 <div v-for="item in comment.attachments" :key="item.id">
                   <div class="adds_file" v-if="item.type == 'link'">
                     <!-- <a href="#" class="adds_file_rem"><span class="icon-cab7"></span></a>
                     <a href="#" class="adds_file_check"><span class="icon-check"></span></a> -->
-                    <a :href="item.payload_url" class="adds_file_txt" target="_blank" >{{item.payload_url}}</a>
+                    <a :href="item.payload_url" class="adds_file_txt" target="_blank">{{item.payload_url}}</a>
                   </div>
                   <div class="adds_file adds_file-sm" v-if="item.type == 'file'">
                     <!-- <a href="#" class="adds_file_rem"><span class="icon-cab7"></span></a>
@@ -47,42 +48,48 @@
 </template>
 
 <script>
-import {GetThesisIdComments} from '@/api'
+import { GetThesisIdComments } from '@/api'
 import { mapActions, mapState } from 'vuex'
 import scale from './Scale'
+
 export default {
-  name: "Comment",
-  props: ["comment"],
-  data: ()=>({
+  name: 'Comment',
+  props: ['comment'],
+  data: () => ({
     toggle: false,
     responseThesisIdComments: null,
 
   }),
-  components:{scale},
-  computed:{
+  watch:{
+    'comment.message':()=>{
+      console.log(123)
+    }
+  },
+  components: { scale },
+  computed: {
     ...mapState('auth', ['auth'])
   },
-  methods:{
+  methods: {
     ...mapActions('modal', ['addModal']),
-    setScale(){
-      if(this.auth.id === null) return this.$store.commit('openDialog', "You can't set vote, please login first");
-      this.addModal({name: 'DiscussionGraph'})
+    setScale() {
+      if (this.auth.id === null) return this.$store.commit('openDialog', this.$lang.auth.voteLogin)
+      this.addModal({ name: 'DiscussionGraph' })
       this.$store.commit('discussion/setThesisId', this.comment.id)
     },
-    showMore(){
+    showMore() {
       this.toggle = !this.toggle
     }
   },
-  async created(){
-      await GetThesisIdComments(this.comment.id).then( res => {
-        this.responseThesisIdComments = res.data
-      })
-    },
+  async created() {
+    await GetThesisIdComments(this.comment.id).then(res => {
+      this.responseThesisIdComments = res.data
+    })
+  },
 }
 </script>
 
 <style scoped>
-.inline{
-  display: inline-block;
-}
+  .inline {
+    display: inline-block;
+  }
 </style>

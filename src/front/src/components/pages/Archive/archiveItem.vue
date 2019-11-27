@@ -14,10 +14,10 @@
 </template>
 
 <script>
-  export default {
-    name: "archiveItem",
-    props: ['item']
-  }
+export default {
+  name: 'archiveItem',
+  props: ['item']
+}
 </script>
 
 <style scoped>

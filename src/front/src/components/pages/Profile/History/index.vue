@@ -12,11 +12,11 @@
         </div>
         <div class="filter_block">
           <div class="filter_block_top">
-            <div class="filter_block_res_title">Выберите нужные пункты:</div>
+            <div class="filter_block_res_title">{{$lang.filter.points}}:</div>
             <div class="filter_block_rads rads">
               <div class="rads_item">
                 <label class="radio"><input type="checkbox" checked="">
-                  <span class="radio_text">По дате <img src="@/assets/svg/arrs.svg" alt=""/></span>
+                  <span class="radio_text">{{$lang.filter.byDate}} <img src="@/assets/svg/arrs.svg" alt=""/></span>
                 </label>
               </div>
               <div class="rads_item">
@@ -29,92 +29,92 @@
                 <label class="radio"><input type="checkbox"><span class="radio_text">Deu</span></label>
               </div>
               <div class="rads_item">
-                <label class="radio"><input type="checkbox"><span class="radio_text">По популярности</span></label>
+                <label class="radio"><input type="checkbox"><span class="radio_text">{{$lang.filter.byPop}}</span></label>
               </div>
             </div>
           </div>
           <div class="filter_block_res">
-            <div class="filter_block_res_title">По аспектам:</div>
+            <div class="filter_block_res_title">{{$lang.filter.byAspects}}:</div>
             <div class="aspect aspect-check aspect-gr">
               <div class="aspect_item">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Карма</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.karma}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Земля</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.earth}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Физика</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.physics}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Квантовая механика</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.quantum}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Космос</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.space}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Футбол</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.football}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Космос</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.space}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Футбол</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.football}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Карма</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.karma}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Земля</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.earth}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Физика</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.physics}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Физика</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.physics}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Космос</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.space}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Футбол</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.football}}</p></div></a>
               </div>
               <div class="aspect_item ">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Космос</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.space}}</p></div></a>
               </div>
               <div class="aspect_item active">
                 <a href="#" class="aspect_item_img">
                   <div class="aspect_item_bg js-bg"><img src="@/assets/img/img3.jpg" alt=""/></div>
-                  <div class="aspect_item_text"><span class="icon-check"></span><p>Футбол</p></div></a>
+                  <div class="aspect_item_text"><span class="icon-check"></span><p>{{$lang.filter.football}}</p></div></a>
               </div>
             </div>
           </div>
@@ -309,14 +309,14 @@
 </template>
 
 <script>
-  import historyItem from './historyItem'
-  export default {
-    components: {
-      historyItem
-    },
+import historyItem from './historyItem'
+export default {
+  components: {
+    historyItem
+  },
 
-    name: "index"
-  }
+  name: 'index'
+}
 </script>
 
 <style scoped>

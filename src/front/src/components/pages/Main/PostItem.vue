@@ -17,17 +17,17 @@
 
 <script>
 export default {
-  name: "PostItem",
+  name: 'PostItem',
   props: ['item'],
   computed:{
     created_at(){
-      let created_at = this.item.created_at;
+      let created_at = this.item.created_at
       return created_at.slice(0, 10)
     }
   },
   methods:{
     cardEvent($event){
-      if($event.target.className == "icon-fav"){
+      if($event.target.className == 'icon-fav'){
         this.$store.dispatch('discussion/toggleDiscusionFav',this.item.id).then(disc =>{
           this.$store.commit('discussion/replaceDiscussionLast', {id : disc.id, is_favorite: disc.is_favorite})
         })

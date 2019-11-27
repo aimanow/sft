@@ -77,7 +77,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
-  name: "Settings",
+  name: 'Settings',
   data() {
     return {
       old_email: '',
@@ -109,32 +109,32 @@ export default {
     },
     changePassword () {
       if (this.new_password !== this.re_new_password) return this.$store.commit('openDialog', 'Пароли не идеинтичны')
-      let form = new FormData();
-        form.append("old_password", this.old_password)
-        form.append("new_password", this.new_password)
-            this.$axios.post('/profiles/current/security/password', form ).then(()=>{
-              this.$store.commit('openDialog', {type: 'success', message: "Your Parol has been successfully chanhe"})
-            }).catch(err => {
-              if (err.response){
-                this.$store.commit('openDialog', err.response.data)
-              }else { this.$store.commit('openDialog', err.message)}
-            })
+      let form = new FormData()
+      form.append('old_password', this.old_password)
+      form.append('new_password', this.new_password)
+      this.$axios.post('/profiles/current/security/password', form ).then(()=>{
+        this.$store.commit('openDialog', {type: 'success', message: 'Your Parol has been successfully chanhe'})
+      }).catch(err => {
+        if (err.response){
+          this.$store.commit('openDialog', err.response.data)
+        }else { this.$store.commit('openDialog', err.message)}
+      })
     },
     changeAvatar (e) {
-      let avatar = e.target.files[0];
+      let avatar = e.target.files[0]
       this.ChangeAvatar({
         profile_id: this.auth.id,
         avatar,
       })
         .then(response => {
-          if (response.status !== 200) return;
-            this.$axios.get('/profiles/current').then(res => {
-              this.updateAvatar()
-                if(res.status == 200){
-                  let auth = res.data;
-                  this.login(auth);
-                }
-            })
+          if (response.status !== 200) return
+          this.$axios.get('/profiles/current').then(res => {
+            this.updateAvatar()
+            if(res.status == 200){
+              let auth = res.data
+              this.login(auth)
+            }
+          })
         })
     }
   }

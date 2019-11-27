@@ -10,7 +10,7 @@
           <a href="#" class="soc_link"><span class="icon-tw"></span></a>
           <a href="#" class="soc_link"><span class="icon-youtube"></span></a>
         </div>
-        <div class="footer_copy">© 2018 SFT. All rights reserved.</div>
+        <div class="footer_copy">© 2019 SFT. All rights reserved.</div>
       </div>
       <div class="footer_col m-hid">
         <h4>{{$lang.footer.footStruct}}</h4>
@@ -53,9 +53,9 @@
 </template>
 
 <script>
-    export default {
-        name: "Footer"
-    }
+export default {
+  name: 'Footer'
+}
 </script>
 
 <style scoped>

@@ -30,4 +30,5 @@ def app_factory(config_type: ConfigType):
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)
+
     return app

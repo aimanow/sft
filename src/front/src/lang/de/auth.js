@@ -12,5 +12,17 @@ module.exports = {
   rePassword: 'Passwort erneut eingeben',
   sendEmail: 'E-Mail',
   backTo: 'Zurück zu',
-  reg: 'Anmeldungen'
+  reg: 'Anmeldungen',
+
+  voteLogin:'Sie können nicht abstimmen, bitte melden Sie sich zuerst an',
+
+  recoveryPassword:'Password recovery',
+  recoveryPass:'Save',
+
+  oauthGoogle:'Google-Autorisierung',
+  oauthVK:'VKontakte-Autorisierung',
+  oauthFacebook:'Facebook-Autorisierung',
+
+  recoveryPasswordSuccess:'Passwort erfolgreich wiederhergestellt',
+  recoveryPasswordError:'Fehler Passwort wiederhergestellt'
 }

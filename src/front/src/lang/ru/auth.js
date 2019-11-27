@@ -12,5 +12,17 @@ module.exports = {
   rePassword: 'Повторить пароль',
   sendEmail: 'Отравить на email',
   backTo: 'Вернуться к ',
-  reg: 'Регистрирации'
+  reg: 'Регистрирации',
+
+  voteLogin:'Вы не можете голосовать, пожалуйста авторизуйтесь',
+
+  recoveryPassword:'Восстановление пароля',
+  recoveryPass:'Восстановить',
+
+  oauthGoogle:'Авторизация Google',
+  oauthVK:'Авторизация Вконтакте',
+  oauthFacebook:'Авторизация Facebook',
+
+  recoveryPasswordSuccess:'Пароль успешно восстановлен',
+  recoveryPasswordError:'Ошибка восстановления пароля'
 }

@@ -8,20 +8,41 @@
           <div class="ed_block_cols">
             <div class="ed_block_left">
               <div class="form_block LK_form_block">
-                <router-link to="/profile/education/edit" class="btn btn-bord-blue"><span class="icon-edit"></span> {{$lang.profile.edit}}</router-link>
+                <router-link to="/profile/education/edit" class="btn btn-bord-blue"><span class="icon-edit"></span> {{$lang.profile.edit}}
+                </router-link>
                 <table class="card_info">
-                  <tr><th>{{$lang.profile.country}}:</th><td>{{ profile_education.country || 'Не заполнено' }}</td></tr>
-                  <tr><th>{{$lang.profile.city}}:</th><td>{{ profile_education.city || 'Не заполнено' }}</td></tr>
-                  <tr><th>{{$lang.profile.uni}}:</th><td>{{ profile_education.high_school || 'Не заполнено' }}</td></tr>
-                  <tr><th>{{$lang.profile.date}}:</th><td>{{ profile_education.graduation_date || 'Не заполнено' }}</td></tr>
-                  <tr><th>{{$lang.profile.fuc}}:</th><td>{{ profile_education.faculty || 'Не заполнено' }}</td></tr>
-                  <tr><th>{{$lang.profile.spec}}:</th><td>{{ profile_education.speciality || 'Не заполнено' }}</td></tr>
+                  <tr>
+                    <th>{{$lang.profile.country}}:</th>
+                    <td>{{ profile_education.country || $lang.profile.empty }}</td>
+                  </tr>
+                  <tr>
+                    <th>{{$lang.profile.city}}:</th>
+                    <td>{{ profile_education.city || $lang.profile.empty }}</td>
+                  </tr>
+                  <tr>
+                    <th>{{$lang.profile.uni}}:</th>
+                    <td>{{ profile_education.high_school || $lang.profile.empty }}</td>
+                  </tr>
+                  <tr>
+                    <th>{{$lang.profile.date}}:</th>
+                    <td>{{ profile_education.graduation_date || $lang.profile.empty }}</td>
+                  </tr>
+                  <tr>
+                    <th>{{$lang.profile.fuc}}:</th>
+                    <td>{{ profile_education.faculty || $lang.profile.empty }}</td>
+                  </tr>
+                  <tr>
+                    <th>{{$lang.profile.spec}}:</th>
+                    <td>{{ profile_education.speciality || $lang.profile.empty }}</td>
+                  </tr>
                 </table>
               </div>
             </div>
             <div class="ed_block_right">
-              <div class="card_verif"><span class="icon-check" v-show="profile_education.is_verified"></span>{{profile_education.is_verified ? $lang.profile.confirm : $lang.profile.notConfirm}}:</div>
-              <div class="add_file js-bg" v-if="profile_education.scan_url.length > 0">
+              <div class="card_verif"><span class="icon-check" v-show="profile_education.is_verified"></span>{{profile_education.is_verified
+                ? $lang.profile.confirm : $lang.profile.notConfirm}}:
+              </div>
+              <div class="add_file js-bg" v-if="profile_education.scan_url && profile_education.scan_url.length > 0">
                 <img :src="$baseUrl + profile_education.scan_url" alt="foto"/>
               </div>
             </div>
@@ -36,7 +57,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: "EducationMain",
+  name: 'EducationMain',
 
   computed: {
     ...mapState('auth', ['auth']),
@@ -47,8 +68,10 @@ export default {
     ...mapActions('profile', ['getUserEducation'])
   },
 
-  mounted () {
-    return this.getUserEducation(this.auth.id).catch(err =>{alert(err.message)})
+  mounted() {
+    return this.getUserEducation(this.auth.id).catch(err => {
+      console.log(err)
+    })
   }
 }
 </script>

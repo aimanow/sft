@@ -1,8 +1,9 @@
 module.exports = {
-	login: 'Login',
+  login: 'Login',
   archive: 'Archive',
   messages: 'Messages',
   favorites: 'Favorites',
   aspects: 'Aspects',
-  searchPlaceHolder: 'What are you looking for?'
+  searchPlaceHolder: 'What are you looking for?',
+  search:'Search'
 }

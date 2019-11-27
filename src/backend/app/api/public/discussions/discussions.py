@@ -31,7 +31,6 @@ class DiscussionList(Resource):
     def get(self):
         """
         Filter discussions
-
         * User can view **their favorite** discussions
         * User can view all discussions
         * User can view **discussions of the day** with sort=popular_today
