@@ -6,14 +6,14 @@ services:
     build:
       context: ./etc/docker/python
     privileged: true
-    command: bash -c "cd backend && bash run_backend.bash"
+    command: bash -c "bash run_backend.bash"
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
     ports:
       - "5000:5000"
     volumes:
-      - ./src:/usr/src/app
+      - ./src/backend:/usr/src/app
     networks:
       - dockernet
 

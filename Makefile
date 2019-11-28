@@ -1,7 +1,7 @@
 # Makefile
 
 build:
-	sudo docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 dockernet || true
+	sudo docker network create -d bridge --subnet 192.168.100.0/24 --gateway 192.168.100.1 dockernet || true
 	echo "Set chmod to directories"
 	echo "Building all containers:"
 	sudo sysctl -w vm.max_map_count=262144
