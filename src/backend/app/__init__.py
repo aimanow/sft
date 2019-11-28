@@ -5,10 +5,7 @@ from config import ConfigType
 
 
 def create_app():
-    if os.environ.get('SFT_CONFIG') == 'prod':
-        config_type = ConfigType.ProductionConfig
-    else:
-        config_type = ConfigType.DevelopmentConfig
+    config_type = ConfigType.ProductionConfig
 
     app = app_factory(config_type)
     return app

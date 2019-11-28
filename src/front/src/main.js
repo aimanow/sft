@@ -67,9 +67,9 @@ Vue.prototype.$defaultLang = userLang
 
 // init modules
 Vue.use(Lang, { default: userLang })
-const baseURL = 'http://localhost:5000/api/public'
+const baseURL = 'http://localhost/api/public'
 Vue.prototype.$axios = axios.create({ baseURL, withCredentials: true })
-Vue.prototype.$baseUrl = 'http://localhost:5000'
+Vue.prototype.$baseUrl = 'http://localhost'
 Vue.config.productionTip = false
 
 

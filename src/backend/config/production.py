@@ -1,7 +1,7 @@
 import os
 from config import ConfigBase
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='../.env')
+load_dotenv(dotenv_path='.env')
 
 
 class ProductionConfig(ConfigBase):

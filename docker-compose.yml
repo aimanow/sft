@@ -15,7 +15,7 @@ services:
     volumes:
       - ./src:/usr/src/app
     networks:
-      - sft
+      - dockernet
 
   nginxapp:
     container_name: nginxapp
@@ -24,10 +24,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    links:
-      - frontendtapp
     networks:
-      - sft
+      - dockernet
 
   frontendtapp:
     container_name: frontendtapp
@@ -36,12 +34,13 @@ services:
     command: bash -c "chmod +x start.sh && ./start.sh"
     environment:
       - HOST=0.0.0.0
+      - PORT=3000
     ports:
-      - "8000:8000"
+      - "3000:3000"
     volumes:
       - ./src/front:/app
     networks:
-      - sft
+      - dockernet
 
   es:
     container_name: es
@@ -54,8 +53,8 @@ services:
     ports:
       - "9200:9200"
     networks:
-      - sft
+      - dockernet
 
 networks:
-  sft:
-    driver: bridge
+  dockernet:
+    external: true
