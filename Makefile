@@ -33,8 +33,3 @@ rebuilt:
 	make stop
 	make build
 	make start
-
-push:
-	git add *
-	git commit -m "Fixes"
-	git push
