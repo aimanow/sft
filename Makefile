@@ -23,7 +23,7 @@ restart:
 logs:
 	sudo docker-compose logs -f
 
-console:
+console-backend:
 	sudo docker exec -it backendapp /bin/sh
 
 list:
