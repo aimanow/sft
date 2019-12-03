@@ -2,7 +2,7 @@
   <div class="win win-schedule" id="win-schedule">
     <div class="win_cont">
       <div class="schedule_block">
-        <div class="schedule_block_in" ref="box" @mousedown="setScale">
+        <div class="schedule_block_in" ref="box" @mousedown="setScale" @touchstart="setScale">
           <div class="schedule_block_c" ref="ball"></div>
         </div>
         <div class="schedule_txt">
@@ -35,6 +35,7 @@
 
 <script>
 import { PatchtThesisVotes, GetCurrentDiscussions, GetArguments } from '@/api'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Graph',
@@ -49,6 +50,9 @@ export default {
     let id = this.$store.state.discussion.thesisId
 
     const thesis = this.$store.state.discussion.thesises[id]
+
+    if (thesis.votes.my_vote == null)
+      return
 
     this.top = thesis.votes.my_vote.y
     this.left = thesis.votes.my_vote.x
@@ -71,6 +75,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('modal', ['closeAllModal']),
     getCoords(elem) {
       let box = elem.getBoundingClientRect()
       return {
@@ -91,8 +96,8 @@ export default {
       box.appendChild(ball)
 
       function moveAt(e) {
-        let left = e.clientX - shiftX
-        let top = e.clientY - shiftY
+        let left = (e.clientX || e.touches[0].clientX) - shiftX
+        let top = (e.clientY || e.touches[0].clientY) - shiftY
         ball.style.left = left + 'px'
         ball.style.top = top + 'px'
         self.top = 10 - Math.round((top + halfBall) / coordsBox.h * 10)
@@ -104,15 +109,27 @@ export default {
       document.onmousemove = function(e) {
         moveAt(e)
       }
+      document.ontouchmove = function(e) {
+        moveAt(e)
+      }
 
       ball.onmouseup = function() {
         document.onmousemove = null
+        document.ontouchmove = null
         ball.onmouseup = null
+        ball.ontouchup = null
       }
 
-      ball.ondragstart = function() {
-        return false
+      ball.ontouchend = function() {
+        document.onmousemove = null
+        document.ontouchmove = null
+        ball.onmouseup = null
+        ball.ontouchup = null
       }
+
+      // ball.ondragstart = function() {
+      //   return false
+      // }
     },
     submit() {
       let id = this.$store.state.discussion.thesisId
@@ -137,7 +154,7 @@ export default {
         GetCurrentDiscussions(this.$route.params.id).then(res => {
           this.$store.commit('discussion/setCurrentDiscussion', res.data)
         })
-        this.$store.commit('modal/closeAllModal')
+        this.closeAllModal()
       })
     }
   }

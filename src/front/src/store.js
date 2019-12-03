@@ -38,6 +38,9 @@ export function createStore () {
         state.alertMessage = ''
         state.alertType = null
       },
+      setDialog(state, payload){
+        state.dialog = payload
+      },
     },
 
     actions: {

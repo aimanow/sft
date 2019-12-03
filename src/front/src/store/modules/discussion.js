@@ -23,6 +23,7 @@ export default {
     discussion_aspects: [],
     selected_aspects: [],
     discussion_arguments: [],
+    discussion_argument_new: true,
     argument_id: null,
     argument_thesis: null,
     argument_thesises: {},
@@ -63,9 +64,11 @@ export default {
           if (thesis.id === payload.thesis_id) {
             thesis.votes.mean_x = payload.mean_x
             thesis.votes.mean_y = payload.mean_y
+            if (thesis.votes.my_vote == null)
+              thesis.votes.my_vote = {}
             thesis.votes.my_vote.x = payload.x
             thesis.votes.my_vote.y = payload.y
-            thesis.message='123'
+            // thesis.message = '123'
           }
         })
       }
@@ -148,7 +151,10 @@ export default {
       state.argument_id = id
     }, //*
     setDiscussionArguments(state, payload) {
-      state.discussion_arguments = payload.items
+      state.discussion_arguments.splice(0, state.discussion_arguments.length)
+      payload.items.forEach((item) => {
+        state.discussion_arguments.push(item)
+      })
       state.resDiscussionArguments = payload
     }, //*
     pushDiscussionArgument(state, payload) {

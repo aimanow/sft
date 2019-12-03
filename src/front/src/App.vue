@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="main-wrapper">
+    <div class="main-wrapper" :style="{ position:(modals.length > 0 ? 'fixed':'inherit'), top:modals.length>0?`-${scrollY}px`:'' }">
       <div v-if="showPreloader" class="preloader">
         <div class="preloader_lays">
           <div class="preloader_para">
@@ -46,7 +46,7 @@ import Footer from '@/components/ui/Footer'
 import SideBar from '@/components/ui/SideBar'
 import Modal from '@/components/ui/Modal'
 
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -55,6 +55,15 @@ export default {
     return {
       showPreloader: false,
     }
+  },
+  computed: {
+    ...mapState('modal', ['modals']),
+    scrollY() {
+      if (window)
+        return window.scrollY
+      return 0
+    }
+
   },
   methods: {
     ...mapMutations('auth', ['login', 'setPermission']),

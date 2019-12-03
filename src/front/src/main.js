@@ -58,7 +58,6 @@ if (process.client) {
   userLang = navigator.language || navigator.userLanguage
   try {
     userLang = userLang.split('-')[0]
-    // eslint-disable-next-line no-empty
   } catch (e) {}
   const validLangs = ['ru', 'en', 'de']
   if (validLangs.indexOf(userLang) < 0)
