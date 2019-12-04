@@ -63,7 +63,7 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: 'https://test.sft.space',
+        target: '',
         changeOrigin: true,
         secure: false
       }
