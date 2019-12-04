@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 
 export default {
   name: 'OAuthGoogle',
@@ -26,6 +26,7 @@ export default {
   methods: {
     ...mapActions('modal', ['addModal', 'closeModal', 'openForgotPassword']),
     ...mapMutations('modal', ['closeAllModal']),
+    ...mapMutations(['openDialog']),
     ...mapActions('auth', ['login']),
 
     windowPopup(options) {
@@ -48,7 +49,7 @@ export default {
           pathData[pdS[0]] = pdS[1]
         })
         code = pathData['code'] || null
-        if(code)
+        if (code)
           code = decodeURIComponent(code)
       } catch (e) {
         code = null
@@ -61,7 +62,7 @@ export default {
       const code = this.getOAuthCode(location)
       if (!code)
         return data
-      data = { oauth: code, provider: 'google' }
+      data = {oauth: code, provider: 'google'}
       return data
     },
 
@@ -72,6 +73,7 @@ export default {
             this.closeAllModal()
           }
         }).catch((err) => {
+          this.closeAllModal()
           if (err.message === 'Request failed with status code 403') {
             this.openDialog(this.$lang.error.authEmailError)
           } else
@@ -85,11 +87,12 @@ export default {
       const redirect_uri = 'https://sft.space/oauth/google'
       // const redirect_uri = window.location.origin+'/oauth/vk'
       const uri_regex = new RegExp(redirect_uri)
+
       const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=' + CLIENTD_ID +
           '&redirect_uri=' + redirect_uri +
           '&scope=email%20profile' +
           '&response_type=code'
-      let win = this.windowPopup({ width: 620, height: 370, url: url })
+      let win = this.windowPopup({width: 620, height: 370, url: url})
       let error = null
       let ok = false
       let watch_timer = setInterval(() => {
@@ -111,7 +114,7 @@ export default {
         if (win.closed) {
           clearInterval(watch_timer)
           if (!ok)
-            this.addModal({ name: 'Login' })
+            this.addModal({name: 'Login'})
         }
       }, 100)
       return error

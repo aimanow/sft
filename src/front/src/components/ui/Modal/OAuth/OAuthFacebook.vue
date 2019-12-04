@@ -26,6 +26,7 @@ export default {
   methods: {
     ...mapActions('modal', ['addModal', 'closeModal', 'openForgotPassword']),
     ...mapMutations('modal', ['closeAllModal']),
+    ...mapMutations(['openDialog']),
     ...mapActions('auth', ['login']),
 
     windowPopup(options) {
@@ -72,6 +73,7 @@ export default {
             this.closeAllModal()
           }
         }).catch((err) => {
+        this.closeAllModal()
           if (err.message === 'Request failed with status code 403') {
             this.openDialog(this.$lang.error.authEmailError)
           } else
