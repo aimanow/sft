@@ -117,8 +117,6 @@ class PasswordAuthentication(Resource):
         except Exception as e:
             pass
 
-        # TODO ADD REGISTER
-
         try:
             user_credentials: UserCredentials = UserCredentials.query.filter(UserCredentials.email == args['email']).one()
         except NoResultFound:
