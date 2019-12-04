@@ -9,4 +9,4 @@ COPY ./nginx.conf /etc/nginx/
 COPY ./conf.d/ /etc/nginx/conf.d/
 
 COPY ./ssl/ /etc/nginx/ssl/
-COPY ./release.txt /var/www/html
+COPY ./release.txt /var/www/html/
