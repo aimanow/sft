@@ -2,8 +2,8 @@ from actions.demo_ban_user import DemoBanUserAction
 from godmode.views.list_view import BaseListView
 from godmode.models.base import BaseAdminModel
 from godmode.widgets.base import BaseWidget
-from groups.demo_group import DemoGroup
-from database.demo import User, demo_database
+from groups.main_group import MainGroup
+from database.db import User, pg_database
 from widgets.boolean import BooleanReverseWidget
 
 
@@ -11,36 +11,36 @@ class NameWidget(BaseWidget):
     filterable = False
 
     def render_list(self, item):
-        return "<b>{}</b>".format(item.name)
+        return "<b>{}</b>".format(item.fullname)
 
 
 class UsersAdminModel(BaseAdminModel):
-    db = demo_database
+    db = pg_database
     name = "users"
     title = "Users"
     icon = "icon-user"
-    group = DemoGroup
+    group = MainGroup
     index = 100
     table = User
-    widgets = {
-        "is_locked": BooleanReverseWidget
-    }
+    # widgets = {
+    #     "is_locked": BooleanReverseWidget
+    # }
 
     class PUsersListView(BaseListView):
         title = "User list"
-        sorting = ["id", "name"]
-        default_sorting = User.created_at.desc()
+        # sorting = ["id", "name"]
+        sorting = ["id", "fullname"]
+        default_sorting = User.registered_at.desc()
         fields = [
             "id",
-            "name",
-            "created_at",
-            "post_count",
-            "is_locked"
+            "fullname",
+            "registered_at",
+            "avatar_path"
         ]
-        object_actions = [DemoBanUserAction]
-        batch_actions = [DemoBanUserAction]
+        # object_actions = [DemoBanUserAction]
+        # batch_actions = [DemoBanUserAction]
         widgets = {
-            "name": NameWidget
+            "fullname": NameWidget
         }
 
     list_view = PUsersListView

@@ -44,8 +44,20 @@ class BaseView(MethodView):
             self.init_fields()
 
     def init_fields(self):
-        self.all_columns_with_metadata = self.model.table.__table__.columns
-        self.all_columns = [column.name for column in self.all_columns_with_metadata]
+        if '__table__' in self.model.table.__dict__:
+            self.all_columns_with_metadata = self.model.table.__table__.columns
+        else:
+            temp_fields = list(
+                filter(lambda k: type(self.model.table.__dict__[k]).__name__ == 'Column', self.model.table.__dict__.keys()))
+            self.all_columns_with_metadata = []
+            for i in temp_fields:
+                self.all_columns_with_metadata.append(self.model.table.__dict__[i])
+
+        self.all_columns = []
+        for column in self.all_columns_with_metadata:
+            if not isinstance(column,str):
+                if 'name' in column.__dict__:
+                    self.all_columns.append(column.name)
         self.fields = list(self.fields or self.model.fields or self.all_columns or [])
         self.display = list(self.display or self.model.display or [])
         populate_display_with_fields = not self.display

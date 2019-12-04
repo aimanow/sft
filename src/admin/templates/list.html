@@ -22,7 +22,7 @@
         <form action="." method="get">
             <div class="content-actions__action">
                 <label for="action-filter">Filter:</label>
-                <input type="text" name="filters" id="action-filter" value="{{ filters or "" }}">
+                <input type="text" name="filters" id="action-filter" value="{{ filters.text or "" }}">
             </div>
             <div class="content-actions__action">
                 <label for="action-limit">Limit:</label>

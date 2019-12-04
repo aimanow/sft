@@ -1,17 +1,19 @@
 import os
 import pathlib
 from dotenv import load_dotenv
+
 load_dotenv(dotenv_path='.env')
 
-DEBUG = bool(os.environ.get("DEBUG", False))
-SQL_DEBUG = os.environ.get("SQL_DEBUG", DEBUG)
+DEBUG = os.getenv("DEBUG", 'False') == 'True'
+SQL_DEBUG = os.getenv("SQL_DEBUG", DEBUG) == 'True'
 
 BASE_PATH = pathlib.Path(__file__).parent
 
-APP_HOST = os.environ.get("APP_HOST", "0.0.0.0")
-APP_PORT = int(os.environ.get("APP_PORT", 1414))
+APP_HOST = os.getenv("ADMIN_APP_HOST", "127.0.0.1")
+APP_PORT = int(os.getenv("ADMIN_APP_PORT", 1414))
 APP_TITLE = "SFT SPACE"
 APP_LOGO = "<strong>SFT SPACE ADMIN</strong>"
+# DATABASE ONLY FOR ADMIN_APP USERS, NOT PRODUCTION DB
 APP_DSN = "sqlite:///godmode/database/godmode.sqlite"
 
 LOGGING = {

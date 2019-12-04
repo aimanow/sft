@@ -105,8 +105,11 @@ class BaseAdminModel:
 
     def list(self, filters, sort_by, limit=100, offset=0):
         items = self.session.query(self.table).order_by(sort_by)
-        if filters:
-            items = items.filter(text(filters))
+        if filters is not None:
+            try:
+                items = items.filter(text(filters.text))
+            except:
+                log.error("Filter error: '{}'".format(filters))
         items = items.limit(limit).offset(offset)
         self.items = items
         items = ACL.filter_items(g.user, self)

@@ -5,5 +5,5 @@ from godmode.acl import ACL
 class GodModeGroup(BaseGroup):
     acl = ACL.ADMIN
     policy = "godmode_group"
-    name = "GodMode"
+    name = "ADMIN"
     index = 0

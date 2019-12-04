@@ -4,17 +4,17 @@ from sqlalchemy.exc import DataError
 from godmode.models.base import BaseAdminModel
 from godmode.views.view import BaseView
 from godmode.acl import ACL
-from database.demo import demo_database
+from database.db import pg_database
 
 
 class IndexAdminModel(BaseAdminModel):
     acl = ACL.ALL
-    db = demo_database
+    db = pg_database
     title = "Home"
     place = None
     url_prefix = "/"
 
-    class DemoIndexView(BaseView):
+    class IndexView(BaseView):
         acl = ACL.ALL
         url = "/"
         title = "Index"
@@ -28,16 +28,11 @@ class IndexAdminModel(BaseAdminModel):
             except DataError:
                 total_users = 0
 
-            try:
-                total_posts = session.execute("select count(id) as value from posts").first()[0]
-            except DataError:
-                total_posts = 0
 
             context = {
                 "message": "Welcome to SFT SPACE ADMIN, {}. You can customize this page.".format(g.user.login),
                 "total_users": total_users,
-                "total_posts": total_posts
             }
             return self.render(**context)
 
-    list_view = DemoIndexView
+    list_view = IndexView
