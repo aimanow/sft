@@ -75,6 +75,9 @@ class DiscussionArgumentList(Resource):
         elif discussion.is_frozen:
             return abort(HTTPStatus.FORBIDDEN, message="Discussion is frozen")
 
+        if len(payload['thesis']['message']) > 1000:
+            return abort(HTTPStatus.FORBIDDEN, message="Too many character in thesis message")
+
         aspects = Aspect.query.filter(Aspect.id.in_(payload['aspect_ids'])).limit(3).all()
 
         created_at = datetime.datetime.now()
