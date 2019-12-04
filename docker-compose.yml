@@ -6,7 +6,7 @@ services:
     build:
       context: ./etc/docker/python
     privileged: true
-    command: bash -c "bash run_backend.bash"
+    command: bash run.sh
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
@@ -31,7 +31,7 @@ services:
     container_name: frontendtapp
     build:
       context: ./etc/docker/nodejs
-    command: bash -c "chmod +x start.sh && ./start.sh"
+    command: bash run.sh
     environment:
       - HOST=0.0.0.0
       - PORT=3000

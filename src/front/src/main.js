@@ -67,9 +67,9 @@ Vue.prototype.$defaultLang = userLang
 
 // init modules
 Vue.use(Lang, { default: userLang })
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://sft.space/api/public' : 'http://localhost:5000/api/public'
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://test.sft.space/api/public' : 'http://localhost:5000/api/public'
 Vue.prototype.$axios = axios.create({ baseURL, withCredentials: true })
-Vue.prototype.$baseUrl = 'https://sft.space'
+Vue.prototype.$baseUrl = process.env.NODE_ENV === 'production' ? 'https://test.sft.space' : 'http://localhost:5000'
 Vue.config.productionTip = false
 
 
