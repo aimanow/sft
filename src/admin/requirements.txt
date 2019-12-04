@@ -1,0 +1,9 @@
+Flask==1.0.2
+Flask-Assets==0.12
+Flask-SQLAlchemy>=2.3.2
+SQLAlchemy>=1.1.0
+py-bcrypt==0.4
+Jinja2==2.10.1
+WTForms==2.2.1
+werkzeug==0.15.2
+pylint==2.3.1
