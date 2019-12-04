@@ -1,8 +1,6 @@
 import axios from 'axios'
 //const qs = require('qs')
-const baseURL = 'https://sft.space/api/public'
-// TODO дописать зависимость baseURL от process.env.HOST & PORT
-// const baseURL = process.env.NODE_ENV === 'production' ? 'http://sft.sliceplanet.ml/api/public' : 'http://localhost:5000/api/public'
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://sft.space/api/public' : 'http://localhost:5000/api/public'
 
 function Request() {
   return axios.create({ baseURL, withCredentials: true })
