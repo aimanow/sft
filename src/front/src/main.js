@@ -58,7 +58,6 @@ if (process.client) {
   userLang = navigator.language || navigator.userLanguage
   try {
     userLang = userLang.split('-')[0]
-    // eslint-disable-next-line no-empty
   } catch (e) {}
   const validLangs = ['ru', 'en', 'de']
   if (validLangs.indexOf(userLang) < 0)
@@ -68,9 +67,9 @@ Vue.prototype.$defaultLang = userLang
 
 // init modules
 Vue.use(Lang, { default: userLang })
-const baseURL = '/api/public'
+const baseURL = 'https://sft.space/api/public'
 Vue.prototype.$axios = axios.create({ baseURL, withCredentials: true })
-Vue.prototype.$baseUrl = ''
+Vue.prototype.$baseUrl = 'https://sft.space'
 Vue.config.productionTip = false
 
 

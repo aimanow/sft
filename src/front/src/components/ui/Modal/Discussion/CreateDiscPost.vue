@@ -174,6 +174,15 @@ export default {
         }
       }
       if (this.thesis) {
+        if (this.form.thesis.length < 10) {
+          this.$store.commit('openDialog', 'Please check thesis message field must have at least 10 characters long')
+          return false
+        }
+        if (this.form.thesis.length > 1000) {
+          this.$store.commit('openDialog', 'Please check thesis message field must have less than 1000 characters long')
+          return false
+        }
+
         PostDiscussionThesis({ id: this.id, form: { position: this.form.position, message: this.form.thesis } })
           .then(res => {
             let myThesis = res.data
@@ -189,6 +198,10 @@ export default {
       } else {
         if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
           this.$store.commit('openDialog', 'Please check filds thesis and arguments the filds must have at least 10 characters long')
+          return false
+        }
+        if (this.form.thesis.length > 1000) {
+          this.$store.commit('openDialog', 'Please check thesis message field must have less than 1000 characters long')
           return false
         }
         if (this.aspectsCount === 0) {
@@ -209,6 +222,7 @@ export default {
             AddThesisLink({ id: myArg.thesis.id, link: this.form.links })
           }
           this.pushDiscussionArgument(myArg)
+
           this.closeAllModal()
 
         })

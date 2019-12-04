@@ -7,7 +7,7 @@
 
     <MainForgotPassword v-if="activeModal && activeModal.name === 'ForgotPassword'" :modal="activeModal"/>
     <MainPasswordRecovery v-if="activeModal && activeModal.name === 'PasswordRecovery'" :modal="activeModal"/>
-    
+
     <RewardsInfo v-if="activeModal && activeModal.name === 'RewardsInfo'" :modal="activeModal"/>
     <DiscussionAddAspects v-if="activeModal && activeModal.name === 'DiscussionAddAspects'" :modal="activeModal"/>
     <ModalArgument v-if="activeModal && activeModal.name === 'ModalArgument'" :modal="activeModal" :id="modals[0].data"/>
@@ -86,7 +86,15 @@ export default {
 
   computed: {
     ...mapState('modal', ['modals']),
-    ...mapState(['dialog', 'alertMessage']),
+    ...mapState(['alertMessage']),
+    dialog: {
+      get() {
+        return this.$store.state.dialog
+      },
+      set(newValue) {
+        this.$store.commit('setDialog', newValue)
+      }
+    },
     alertColor() {
       if (this.$store.state.alertType) {
         return this.$store.state.alertType

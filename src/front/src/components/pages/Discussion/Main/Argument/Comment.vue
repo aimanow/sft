@@ -60,8 +60,8 @@ export default {
     responseThesisIdComments: null,
 
   }),
-  watch:{
-    'comment.message':()=>{
+  watch: {
+    'comment.message': () => {
       console.log(123)
     }
   },
@@ -73,8 +73,10 @@ export default {
     ...mapActions('modal', ['addModal']),
     setScale() {
       if (this.auth.id === null) return this.$store.commit('openDialog', this.$lang.auth.voteLogin)
-      this.addModal({ name: 'DiscussionGraph' })
-      this.$store.commit('discussion/setThesisId', this.comment.id)
+      if (this.auth.id !== this.comment.author.id && this.comment.votes.my_vote == null) {
+        this.addModal({ name: 'DiscussionGraph' })
+        this.$store.commit('discussion/setThesisId', this.comment.id)
+      }
     },
     showMore() {
       this.toggle = !this.toggle
