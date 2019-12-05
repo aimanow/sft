@@ -3,7 +3,7 @@ import axios from 'axios'
 const baseURL = process.env.NODE_ENV === 'production' ? '/api/public' : 'http://localhost:5000/api/public'
 
 function Request() {
-  return axios.create({ baseURL, withCredentials: true })
+  return axios.create({baseURL, withCredentials: true})
 }
 
 let request = Request()
@@ -53,7 +53,7 @@ export function EditEmail(data) {
   form.append('email', data.new_email)
   return request.post('/profiles/current/security/email', form)
 }//*
-export function ChangeAvatar({ profile_id, avatar }) {
+export function ChangeAvatar({profile_id, avatar}) {
   let form = new FormData()
   form.append('avatar', avatar)
 
@@ -65,7 +65,7 @@ export function ChangeAvatar({ profile_id, avatar }) {
       }
     })
 }//*
-export function EditProfileEducation({ id, data }) {
+export function EditProfileEducation({id, data}) {
   return request.put(`/profiles/${id}/education`, data,
     {
       headers: {
@@ -73,7 +73,7 @@ export function EditProfileEducation({ id, data }) {
       }
     })
 }//*
-export function EditProfileEducationScan({ id, scan }) {
+export function EditProfileEducationScan({id, scan}) {
   let form = new FormData()
   form.append('scan', scan)
   return request.put(`/profiles/${id}/education/scan`, form,
@@ -111,7 +111,7 @@ export function CreateAspects(payload) {
     }
   })
 } //*
-export function CreateAspectsImage({ id, image }) {
+export function CreateAspectsImage({id, image}) {
   let form = new FormData()
   form.append('image', image)
   return request.put(`/aspects/${id}/image`, form, {
@@ -121,11 +121,11 @@ export function CreateAspectsImage({ id, image }) {
     }
   })
 } //*
-export function GetFilteredDiscussion(query) {
-  return request.get(`/discussions?q=${query}&location=all&sort=last&page=1`)
+export function GetFilteredDiscussion(query, lang = null) {
+  return request.get(`/discussions?q=${query}&location=all&sort=last&page=1${lang != null ? `&lang=${lang}` : ''}`)
 }//*
-export function GetAllDiscussion(page) {
-  return request.get(`/discussions?location=all&sort=last&page=${page}`)
+export function GetAllDiscussion(page, lang = null) {
+  return request.get(`/discussions?location=all&sort=last&page=${page}${lang != null ? `&lang=${lang}` : ''}`)
 }//*
 export function CreateNewDiscussion(data) {
   return request.post('/discussions', data,
@@ -136,7 +136,7 @@ export function CreateNewDiscussion(data) {
       }
     })
 } //*
-export function PostDiscussionArgements({ id, form }) {
+export function PostDiscussionArgements({id, form}) {
   return request.post(`/discussions/${id}/arguments`, form, {
     headers: {
       'Accept': 'application/json',
@@ -144,7 +144,7 @@ export function PostDiscussionArgements({ id, form }) {
     }
   })
 }//*
-export function PostDiscussionThesis({ id, form }) {
+export function PostDiscussionThesis({id, form}) {
   return request.post(`/arguments/${id}/theses`, form, {
     headers: {
       'Accept': 'application/json',
@@ -161,7 +161,7 @@ export function CreateDiscussionArguments(data) {
       }
     })
 } //*
-export function PutDiscussionImage({ id, image }) {
+export function PutDiscussionImage({id, image}) {
   request.put(`/discussions/${id}/image`, image, {
     headers: {
       'Accept': 'application/json',
@@ -169,8 +169,8 @@ export function PutDiscussionImage({ id, image }) {
     }
   })
 } //*
-export function GetDiscussions() {
-  return request.get('/discussions')
+export function GetDiscussions(lang = null) {
+  return request.get(`/discussions${lang != null ? `?lang=${lang}` : ''}`)
 } //* not ready
 export function DeleteDiscussion(id) {
   return request.delete(`/discussions/${id}`)
@@ -178,17 +178,17 @@ export function DeleteDiscussion(id) {
 export function DeleteAspect(id) {
   return request.delete(`/aspects/${id}`)
 }//*
-export function GetAuthorDiscussions({ id, page }) {
+export function GetAuthorDiscussions({id, page}) {
   return request.get(`/discussions?author=${id}&location=all&sort=last&page=${page}`)
 } //*
 export function GetDiscussion(id) {
   return request.get('/discussions/' + id)
 } //*
-export function GetDiscussionsTop() {
-  return request.get('/discussions?location=all&sort=popular&page=1')
+export function GetDiscussionsTop(lang = null) {
+  return request.get(`/discussions?location=all&sort=popular&page=1${lang != null ? `&lang=${lang}` : ''}`)
 } //*
-export function GetDiscussionsLast() {
-  return request.get('/discussions?location=all&sort=last&page=1')
+export function GetDiscussionsLast(lang = null) {
+  return request.get(`/discussions?location=all&sort=last&page=1${lang != null ? `&lang=${lang}` : ''}`)
 }//*
 export function GetDiscussionsFav(page) {
   return request.get(`/discussions?location=favorites&sort=last&page=${page}`)
@@ -199,7 +199,7 @@ export function GetCurrentDiscussions(id) {
 export function GetThesisIdComments(id) {
   return request.get(`/theses/${id}/comments?page=1`)
 }//*
-export function AddThesisFile({ id, file }) {
+export function AddThesisFile({id, file}) {
   let form = new FormData()
   file.forEach(file => {
     form.append('files[]', file)
@@ -212,7 +212,7 @@ export function AddThesisFile({ id, file }) {
       }
     })
 }//*
-export function AddThesisLink({ id, link }) {
+export function AddThesisLink({id, link}) {
   let form = new FormData()
   link.forEach(link => {
     form.append('links[]', link)
