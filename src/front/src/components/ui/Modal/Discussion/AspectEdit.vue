@@ -74,8 +74,7 @@ export default {
           argument_id: this.$store.state.discussion.discussion_arguments[0].id
         }
       }).then((r) => {
-        console.log(r)
-        this.changeCurrentDiscussionAspects({aspects: r.aspects})
+        this.changeCurrentDiscussionAspects({aspects: r.data.aspects})
         this.closeAllModal()
       })
     },

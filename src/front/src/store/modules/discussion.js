@@ -52,7 +52,7 @@ export default {
     changeCurrentDiscussionAspects(state, payload) {
       state.current_discussion.aspects.splice(0, state.discussion_arguments.length)
       payload.aspects.forEach((a) => {
-        state.current_discussion.aspects.push(a.id)
+        state.current_discussion.aspects.push(a)
       })
     },//*
     setThesisId(state, payload) {
