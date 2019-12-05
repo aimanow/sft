@@ -1,3 +1,3 @@
-FROM node:carbon
+FROM node:latest
 
 WORKDIR /app
