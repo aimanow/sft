@@ -14,7 +14,7 @@ APP_PORT = int(os.getenv("ADMIN_APP_PORT", 1414))
 APP_TITLE = "SFT SPACE"
 APP_LOGO = "<strong>SFT SPACE ADMIN</strong>"
 # DATABASE ONLY FOR ADMIN_APP USERS, NOT PRODUCTION DB
-APP_DSN = "sqlite:///godmode/database/godmode.sqlite"
+APP_DSN = "sqlite:///database.sqlite"
 
 LOGGING = {
     "version": 1,
