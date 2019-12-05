@@ -1,0 +1,16 @@
+module.exports = {
+  chemistry: 'Chemistry',
+  physics: 'Physics',
+  math: 'Math',
+  earth: 'Earth',
+  beauty: 'Beauty',
+  medicine: 'Medicine',
+  civics: 'Civics',
+  opinion: 'Public opinion',
+  sociology: 'Sociology',
+  history: 'History',
+  hysteria: 'Hysteria',
+  mystic: 'Mystic',
+  faith: 'Faith',
+  paleontology: 'Paleontology',
+}

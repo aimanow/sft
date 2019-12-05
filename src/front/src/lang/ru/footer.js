@@ -1,0 +1,16 @@
+module.exports = {
+  stayConnect: 'Оставайтесь на связи',
+  footStruct: 'Структуры',
+  footSup: 'Поддержка',
+  footNext: 'Дальше нужно уточнять',
+  qa: 'Вопросы-Ответы',
+  footDocs: 'Документация',
+  footReg: 'Регистр',
+  footAuth: 'Авторизоваться',
+  aboutSite: 'О сайте',
+  contacts: 'Контакты',
+  faq: 'FAQ',
+  quickStart: 'С чего начать',
+  supportProject: 'Поддержать проект',
+  developSitemap: 'Карта сайта Разработчикам',
+}

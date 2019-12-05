@@ -1,0 +1,16 @@
+module.exports = {
+  chemistry:'Химия',
+  physics:'Физика',
+  math:'Математика',
+  earth:'Земля',
+  beauty:'Красота',
+  medicine:'Медицина',
+  civics:'Гражданское право',
+  opinion:'Общественное мнение',
+  sociology:'Социология',
+  history:'История',
+  hysteria:'Истерия',
+  mystic:'Мистика',
+  faith:'Религия',
+  paleontology:'Палеонтология',
+}

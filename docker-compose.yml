@@ -1,0 +1,61 @@
+version: "3.5"
+
+services:
+  backendapp:
+    container_name: backendapp
+    build:
+      context: ./etc/docker/python
+    privileged: true
+    command: bash run.sh
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src/backend:/usr/src/app
+    networks:
+      - dockernet
+
+  nginxapp:
+    container_name: nginxapp
+    build:
+      context: ./etc/docker/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - dockernet
+
+  frontendtapp:
+    container_name: frontendtapp
+    build:
+      context: ./etc/docker/nodejs
+    command: bash run.sh
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/front:/app
+    networks:
+      - dockernet
+
+  es:
+    container_name: es
+    environment:
+      - discovery.type=single-node
+    build:
+      context: ./etc/docker/elasticsearch
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - dockernet
+
+networks:
+  dockernet:
+    external: true

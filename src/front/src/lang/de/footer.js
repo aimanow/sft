@@ -1,0 +1,16 @@
+module.exports = {
+  stayConnect: 'Bleiben Sie verbunden',
+  footStruct: 'Strukturen',
+  footSup: 'Unterstützung',
+  footNext: 'Als nächstes müssen Sie klären',
+  qa: 'Fragen und Antworten',
+  footDocs: 'Dokumentation',
+  footReg: 'Registrieren',
+  footAuth: 'Login',
+  aboutSite: 'Impressum',
+  contacts: 'Kontaktdaten',
+  faq: 'FAQ',
+  quickStart: 'Schnellstart',
+  supportProject: 'Projekt unterstützen',
+  developSitemap: 'Sitemap für Entwickler',
+}
