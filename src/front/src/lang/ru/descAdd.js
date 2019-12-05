@@ -4,6 +4,7 @@ module.exports = {
   addNew: 'Добавить',
   cancel: 'Отменить',
   themeTitle: 'Название темы:',
+  themeDescription: 'Описание темы:',
   position: 'Моя позиция:',
   select: 'Выберите аспекты',
   selectOne: 'Выберите аспект',
