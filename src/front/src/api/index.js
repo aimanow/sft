@@ -136,6 +136,15 @@ export function CreateNewDiscussion(data) {
       }
     })
 } //*
+export function EditDiscussion({id, form}) {
+  return request.patch('/discussions/' + id, form,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+} //*
 export function PostDiscussionArgements({id, form}) {
   return request.post(`/discussions/${id}/arguments`, form, {
     headers: {

@@ -30,4 +30,6 @@ module.exports = {
   graphPersuasiveness:'Convincingness',
   graphPersRaiting:'Convincingness Raiting',
   graphCredRaiting:'Credibility Raiting',
+
+  loadingAspects:'Loading aspects...',
 }
