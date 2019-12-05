@@ -38,6 +38,18 @@ class ConfigBase:
     MAIL_USERNAME = ''
     MAIL_PASSWORD = ''
 
+    OAUTH_VK_ID = ''
+    OAUTH_VK_SECRET = ''
+    OAUTH_VK_REDIRECT = ''
+
+    OAUTH_GOOGLE_ID = ''
+    OAUTH_GOOGLE_SECRET = ''
+    OAUTH_GOOGLE_REDIRECT = ''
+
+    OAUTH_FACEBOOK_ID = ''
+    OAUTH_FACEBOOK_SECRET = ''
+    OAUTH_FACEBOOK_REDIRECT = ''
+
 
 class ConfigType(Enum):
     ProductionConfig = 'config.production.ProductionConfig'

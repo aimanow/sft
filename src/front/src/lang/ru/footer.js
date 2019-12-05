@@ -7,4 +7,10 @@ module.exports = {
   footDocs: 'Документация',
   footReg: 'Регистр',
   footAuth: 'Авторизоваться',
+  aboutSite: 'О сайте',
+  contacts: 'Контакты',
+  faq: 'FAQ',
+  quickStart: 'С чего начать',
+  supportProject: 'Поддержать проект',
+  developSitemap: 'Карта сайта Разработчикам',
 }

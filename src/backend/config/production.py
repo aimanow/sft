@@ -63,3 +63,15 @@ class ProductionConfig(ConfigBase):
     FRONTEND_PASSWORD_RESET_URL = os.getenv('FRONTEND_PASSWORD_RESET_URL')
     if FRONTEND_PASSWORD_RESET_URL is None:
         raise EnvironmentError("FRONTEND_PASSWORD_RESET_URL env variable is not set")
+
+    OAUTH_VK_ID = os.getenv('OAUTH_VK_ID', False)
+    OAUTH_VK_SECRET = os.getenv('OAUTH_VK_SECRET', False)
+    OAUTH_VK_REDIRECT = os.getenv('OAUTH_VK_REDIRECT', False)
+
+    OAUTH_GOOGLE_ID = os.getenv('OAUTH_GOOGLE_ID', False)
+    OAUTH_GOOGLE_SECRET = os.getenv('OAUTH_GOOGLE_SECRET', False)
+    OAUTH_GOOGLE_REDIRECT = os.getenv('OAUTH_GOOGLE_REDIRECT', False)
+
+    OAUTH_FACEBOOK_ID = os.getenv('OAUTH_FACEBOOK_ID', False)
+    OAUTH_FACEBOOK_SECRET = os.getenv('OAUTH_FACEBOOK_SECRET', False)
+    OAUTH_FACEBOOK_REDIRECT = os.getenv('OAUTH_FACEBOOK_REDIRECT', False)

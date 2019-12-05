@@ -15,22 +15,10 @@ from sqlalchemy.orm.exc import NoResultFound
 from app.api.models import ProfileModel
 from app.api.namespaces import access
 from app.authorization.permissions import update_user_permissions
+from flask import render_template, current_app
 from database.models import UserCredentials, User
 from database import db
 from sqlalchemy.exc import IntegrityError
-
-VK_ID = '7199975'
-VK_SECRET = 'Mgp5TOAq2iebJkR6mm5N'
-VK_REDIRECT = 'https://sft.space/oauth/vk'
-
-GOOGLE_ID = '148084958804-dkk0uf9jai6lufivefuegtnu4oidt2cf.apps.googleusercontent.com'
-GOOGLE_SECRET = 'HrezXyPrXmD85ebaXUYO55Db'
-GOOGLE_REDIRECT = 'https://sft.space/oauth/google'
-
-FACEBOOK_ID = '403797927239132'
-FACEBOOK_SECRET = '05580c65057f0d91239d5f1a191ade9c'
-FACEBOOK_REDIRECT = 'https://sft.space/oauth/facebook'
-
 
 @access.route('/auth')
 class PasswordAuthentication(Resource):
@@ -55,11 +43,11 @@ class PasswordAuthentication(Resource):
 
         try:
             if args['oauth'] and args['provider']:
-                if args['provider'] == 'vk':
+                if args['provider'] == 'vk' and current_app.config['OAUTH_GOOGLE_ID']:
                     oauth_seed = requests.get('https://oauth.vk.com/access_token?'
-                                              'client_id=' + VK_ID +
-                                              '&client_secret=' + VK_SECRET +
-                                              '&redirect_uri=' + VK_REDIRECT +
+                                              'client_id=' + current_app.config['OAUTH_VK_ID'] +
+                                              '&client_secret=' + current_app.config['OAUTH_VK_SECRET'] +
+                                              '&redirect_uri=' + current_app.config['OAUTH_VK_REDIRECT'] +
                                               '&code=' + args['oauth']).text
                     oauth_data = json.loads(oauth_seed)
                     user_id = oauth_data['user_id']
@@ -73,13 +61,13 @@ class PasswordAuthentication(Resource):
                     oauth_data = json.loads(oauth_seed)
                     full_name = oauth_data['first_name'] + ' ' + oauth_data['last_name']
 
-                if args['provider'] == 'google':
+                if args['provider'] == 'google' and current_app.config['OAUTH_GOOGLE_ID']:
                     oauth_seed = requests.post('https://www.googleapis.com/oauth2/v4/token', data={
                         'code': args['oauth'],
                         'grant_type': 'authorization_code',
-                        'redirect_uri': GOOGLE_REDIRECT,
-                        'client_id': GOOGLE_ID,
-                        'client_secret': GOOGLE_SECRET,
+                        'redirect_uri': current_app.config['OAUTH_GOOGLE_REDIRECT'],
+                        'client_id': current_app.config['OAUTH_GOOGLE_ID'],
+                        'client_secret': current_app.config['OAUTH_GOOGLE_SECRET'],
                     }, headers={
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }).text
@@ -96,11 +84,11 @@ class PasswordAuthentication(Resource):
                     if args['email'] and args['email'] != '':
                         pass_password = True
 
-                if args['provider'] == 'facebook':
+                if args['provider'] == 'facebook' and current_app.config['OAUTH_FACEBOOK_ID']:
                     oauth_seed = requests.get('https://graph.facebook.com/v5.0/oauth/access_token?'
-                                              'client_id=' + FACEBOOK_ID +
-                                              '&redirect_uri=' + FACEBOOK_REDIRECT +
-                                              '&client_secret=' + FACEBOOK_SECRET +
+                                              'client_id=' + current_app.config['OAUTH_FACEBOOK_ID'] +
+                                              '&redirect_uri=' + current_app.config['OAUTH_FACEBOOK_REDIRECT'] +
+                                              '&client_secret=' + current_app.config['OAUTH_FACEBOOK_SECRET'] +
                                               '&code=' + args['oauth']).text
                     oauth_data = json.loads(oauth_seed)
                     access_token = oauth_data['access_token']
@@ -116,8 +104,6 @@ class PasswordAuthentication(Resource):
                         pass_password = True
         except Exception as e:
             pass
-
-        # TODO ADD REGISTER
 
         try:
             user_credentials: UserCredentials = UserCredentials.query.filter(UserCredentials.email == args['email']).one()
