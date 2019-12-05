@@ -105,6 +105,7 @@ class DiscussionList(Resource):
             author=current_user,
             lang=payload['lang'],
             title=payload['title'],
+            description=payload['description'],
             created_at=datetime.datetime.now()
         )
         db.session.add(discussion)
