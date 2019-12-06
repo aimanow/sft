@@ -19,6 +19,12 @@
                          @change="nextStep(2)"/>
                 </div>
               </div>
+              <div class="w_v">
+                <div class="w_thesis_title">{{$lang.descAdd.themeDescription}}</div>
+                <div class="w_v_inp">
+                  <input type="text" class="t-inp" v-model="newDiscussionForm.description" :placeholder="$lang.descAdd.themeDescription"/>
+                </div>
+              </div>
               <div class="edu-inp-wrap">
                 <div class="w_thesis_title">{{$lang.descAdd.addImage}}:</div>
                 <div class="edu-inp-cont" style="text-align: center;">
@@ -145,6 +151,7 @@ export default {
     return {
       newDiscussionForm: {
         title: '',
+        description: '',
         lang: ''
       },
       responseDiscussion: null,

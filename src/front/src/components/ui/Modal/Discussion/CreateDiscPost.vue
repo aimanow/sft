@@ -72,8 +72,8 @@
 <script>
 //import aspectItem from './aspectItem' './Item'
 import aspectItem from '@/components/pages/Discussion/Add/Item'
-import { mapMutations, mapState, mapActions } from 'vuex'
-import { PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAllAspects } from '@/api'
+import {mapMutations, mapState, mapActions} from 'vuex'
+import {PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAllAspects} from '@/api'
 // import Slick from 'vue-slick'
 
 export default {
@@ -86,7 +86,7 @@ export default {
     thesis: Boolean,
     id: null
   },
-  mounted(){
+  mounted() {
     this.$nextTick(function () {
       this.slickComp = 'Slick'
     })
@@ -148,7 +148,7 @@ export default {
 
   methods: {
     ...mapMutations('modal', ['closeAllModal']),
-    ...mapMutations('discussion', ['pushDiscussionArgument', 'pushDiscussionThesis']),
+    ...mapMutations('discussion', ['pushDiscussionArgument', 'pushDiscussionThesis', 'updateArgumentThesis']),
     ...mapActions('discussion', ['addDiscussionArguments']),
     ...mapActions('modal', ['addModal']),
     // addAspectId(id){
@@ -183,16 +183,28 @@ export default {
           return false
         }
 
-        PostDiscussionThesis({ id: this.id, form: { position: this.form.position, message: this.form.thesis } })
+        PostDiscussionThesis({id: this.id, form: {position: this.form.position, message: this.form.thesis}})
           .then(res => {
             let myThesis = res.data
             if (this.form.files.length) {
-              AddThesisFile({ id: myThesis.id, file: this.form.files })
+              AddThesisFile({id: myThesis.id, file: this.form.files}).then((response) => {
+                this.updateArgumentThesis({
+                  argument_id: this.id,
+                  thesis_id: myThesis.id,
+                  attachments:response.data.attachments
+                })
+              })
             }
             if (this.form.links.length) {
-              AddThesisLink({ id: myThesis.id, link: this.form.links })
+              AddThesisLink({id: myThesis.id, link: this.form.links}).then((response) => {
+                this.updateArgumentThesis({
+                  argument_id: this.id,
+                  thesis_id: myThesis.id,
+                  attachments:response.data.attachments
+                })
+              })
             }
-            this.pushDiscussionThesis({ thesis: myThesis, id: this.id })
+            this.pushDiscussionThesis({thesis: myThesis, id: this.id})
             this.closeAllModal()
           })
       } else {
@@ -213,13 +225,13 @@ export default {
           return false
         }
 
-        PostDiscussionArgements({ id: this.$route.params.id, form }).then((res) => {
+        PostDiscussionArgements({id: this.$route.params.id, form}).then((res) => {
           let myArg = res.data
           if (this.form.files.length) {
-            AddThesisFile({ id: myArg.thesis.id, file: this.form.files })
+            AddThesisFile({id: myArg.thesis.id, file: this.form.files})
           }
           if (this.form.links.length) {
-            AddThesisLink({ id: myArg.thesis.id, link: this.form.links })
+            AddThesisLink({id: myArg.thesis.id, link: this.form.links})
           }
           this.pushDiscussionArgument(myArg)
 

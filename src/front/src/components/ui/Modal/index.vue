@@ -32,6 +32,8 @@
     <OAuthGoogle v-if="activeModal && activeModal.name === 'OAuthGoogle'" :modal="activeModal"/>
     <OAuthFacebook v-if="activeModal && activeModal.name === 'OAuthFacebook'" :modal="activeModal"/>
 
+    <AspectEdit v-if="activeModal && activeModal.name === 'AspectEdit'" :modal="activeModal"/>
+
   </div>
 </template>
 
@@ -54,6 +56,7 @@ import OAuthVK from './OAuth/OAuthVK'
 import OAuthFacebook from './OAuth/OAuthFacebook'
 import OAuthGoogle from './OAuth/OAuthGoogle'
 
+import AspectEdit from './Discussion/AspectEdit'
 
 import { mapState } from 'vuex'
 
@@ -77,6 +80,8 @@ export default {
     OAuthVK,
     OAuthGoogle,
     OAuthFacebook,
+
+    AspectEdit
   },
   methods: {
     closeDialog() {

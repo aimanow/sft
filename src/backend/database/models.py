@@ -351,6 +351,7 @@ class Discussion(SearchableMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lang = db.Column(db.String(3), nullable=False)
     title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
     image_path = db.Column(db.String)
     created_at = db.Column(db.DateTime, nullable=False)
 

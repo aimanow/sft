@@ -4,6 +4,7 @@ module.exports = {
   addNew: 'Hinzufügen',
   cancel: 'Abbrechen',
   themeTitle: 'Thementitel:',
+  themeDescription: 'Themenbeschreibung:',
   position: 'Meine Position:',
   select: 'Aspekte auswählen',
   selectOne: 'Aspekte auswählen',
@@ -29,4 +30,6 @@ module.exports = {
   graphPersuasiveness:'Überzeugungskraft',
   graphPersRaiting:'Überzeugungsbewertung',
   graphCredRaiting:'Glaubwürdigkeitsbewertung',
+
+  loadingAspects:'Laden aspects...',
 }
