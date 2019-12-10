@@ -4,6 +4,7 @@ module.exports = {
   addNew: 'Add',
   cancel: 'Cancel',
   themeTitle: 'Topic Title:',
+  themeDescription: 'Topic Description:',
   position: 'My position:',
   select: 'Select aspects',
   selectOne: 'Select aspect',
@@ -29,4 +30,6 @@ module.exports = {
   graphPersuasiveness:'Convincingness',
   graphPersRaiting:'Convincingness Raiting',
   graphCredRaiting:'Credibility Raiting',
+
+  loadingAspects:'Loading aspects...',
 }

@@ -25,6 +25,7 @@ class DiscussionList(Resource):
         choices=['last', 'popular', 'popular_today'], default='last',
     ))
     discussions_filter.add_argument('page', default=1, location='args', type=int, help="Result page number")
+    discussions_filter.add_argument('lang', type=str, location='args', help="Discussion lang")
 
     @discussions.expect(discussions_filter)
     @discussions.marshal_with(DiscussionPaginationModel)
@@ -69,6 +70,9 @@ class DiscussionList(Resource):
         if args['author'] is not None:
             items_query = items_query.filter(Discussion.author_id == args['author'])
 
+        if args['lang'] is not None:
+            items_query = items_query.filter(Discussion.lang == args['lang'])
+
         if args['sort'] == 'popular':
             items_query = items_query.order_by(desc(Discussion.rating))
         elif args['sort'] == 'popular_today':
@@ -105,6 +109,7 @@ class DiscussionList(Resource):
             author=current_user,
             lang=payload['lang'],
             title=payload['title'],
+            description=payload['description'],
             created_at=datetime.datetime.now()
         )
         db.session.add(discussion)

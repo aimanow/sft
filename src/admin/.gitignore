@@ -33,3 +33,4 @@ pip-log.txt
 local_settings.py
 # internal/godmode.sqlite
 .env
+*.sqlite

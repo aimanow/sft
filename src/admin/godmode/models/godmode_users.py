@@ -159,5 +159,5 @@ class GodModeUsersAdminModel(BaseAdminModel):
 
     @classmethod
     def check_password(cls, user, raw_password):
-        is_valid = bcrypt.checkpw(raw_password, user.password)
+        is_valid = bcrypt.checkpw(raw_password.encode("utf-8"), user.password.encode("utf-8"))
         return is_valid

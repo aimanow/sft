@@ -4,11 +4,11 @@ from flask import request
 from flask_principal import Permission, UserNeed
 from flask_restplus import Resource, abort
 
-from app.api.models import DiscussionModel
+from app.api.models import DiscussionModel, ArgumentModel
 from app.api.namespaces import discussions
 from app.authorization.permissions import EditDiscussionPermission
 from database import db
-from database.models import Discussion
+from database.models import Discussion, Argument, Aspect, ArgumentAspect
 
 
 @discussions.route('/<int:{}>'.format('discussion_id'))
@@ -30,7 +30,7 @@ class DiscussionItem(Resource):
         db.session.commit()
         return discussion
 
-    @discussions.expect(DiscussionModel, validate=True)
+    @discussions.expect(DiscussionModel)
     @discussions.response(HTTPStatus.FORBIDDEN, description="User is not authorized to edit the discussion")
     @discussions.marshal_with(DiscussionModel)
     def patch(self, discussion_id):
@@ -53,9 +53,22 @@ class DiscussionItem(Resource):
 
         payload = request.json
 
-        discussion.lang = payload['lang']
-        discussion.title = payload['title']
+        if 'lang' in payload:
+            discussion.lang = payload['lang']
+        if 'title' in payload:
+            discussion.title = payload['title']
+
+        if 'aspects' in payload:
+            argument = Argument.query.get(payload['argument_id'])
+            aspects = Aspect.query.filter(Aspect.id.in_(payload['aspects'])).limit(3).all()
+            ArgumentAspect.query.filter_by(argument_id=payload['argument_id']).delete()
+            for aspect in aspects:
+                db.session.add(ArgumentAspect(
+                    argument_id=payload['argument_id'],
+                    aspect_id=aspect.id
+                ))
         db.session.commit()
+        discussion = Discussion.query.get(discussion_id)
 
         return discussion
 
