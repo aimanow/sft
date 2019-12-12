@@ -21,7 +21,7 @@ module.exports = {
   addImage: 'Bild hinzufügen',
   addNewAspect: 'Fügen Sie Ihre eigene Aspektoption hinzu',
 
-  argAdditional:'Zusatz',
+  argAdditional:'Bestätigung',
   argConflict:'Widerlegung',
   addThesis:'These hinzufügen',
 
