@@ -23,7 +23,7 @@ module.exports = {
 
   argAdditional:'Zusatz',
   argConflict:'Widerlegung',
-  addThesis:'Abschlussarbeit hinzufügen',
+  addThesis:'These hinzufügen',
 
   graphCommit:'Bestätigen',
   graphCredibleness:'Glaubwürdigkeit',
