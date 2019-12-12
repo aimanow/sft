@@ -31,5 +31,5 @@ module.exports = {
   graphPersRaiting:'Überzeugungsbewertung',
   graphCredRaiting:'Glaubwürdigkeitsbewertung',
 
-  loadingAspects:'Laden aspects...',
+  loadingAspects:'Aspekte werden geladen...',
 }
