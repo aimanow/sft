@@ -21,9 +21,9 @@ module.exports = {
   addImage: 'Bild hinzufügen',
   addNewAspect: 'Fügen Sie Ihre eigene Aspektoption hinzu',
 
-  argAdditional:'Zusatz',
+  argAdditional:'Bestätigung',
   argConflict:'Widerlegung',
-  addThesis:'Abschlussarbeit hinzufügen',
+  addThesis:'These hinzufügen',
 
   graphCommit:'Bestätigen',
   graphCredibleness:'Glaubwürdigkeit',
@@ -31,5 +31,5 @@ module.exports = {
   graphPersRaiting:'Überzeugungsbewertung',
   graphCredRaiting:'Glaubwürdigkeitsbewertung',
 
-  loadingAspects:'Laden aspects...',
+  loadingAspects:'Aspekte werden geladen...',
 }
