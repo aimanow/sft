@@ -82,12 +82,12 @@ export default {
     },
 
     doLogin() {
-      const CLIENTD_ID = '403797927239132'
+      const CLIENT_ID = process.env.VUE_APP_OAUTH_FACEBOOK_ID
 
-      const redirect_uri = 'https://sft.space/oauth/facebook'
-      // const redirect_uri = window.location.origin+'/oauth/vk'
+      const redirect_uri = window.location.origin+'/oauth/facebook'
       const uri_regex = new RegExp(redirect_uri)
-      const url = 'https://www.facebook.com/v5.0/dialog/oauth?client_id=' + CLIENTD_ID +
+
+      const url = 'https://www.facebook.com/v5.0/dialog/oauth?client_id=' + CLIENT_ID +
           '&redirect_uri=' + redirect_uri +
           '&scope=email' +
           '&state={"{st=state123abc,ds=123456789}"}'

@@ -82,13 +82,12 @@ export default {
     },
 
     doLogin() {
-      const CLIENTD_ID = '148084958804-dkk0uf9jai6lufivefuegtnu4oidt2cf.apps.googleusercontent.com'
+      const CLIENT_ID = process.env.VUE_APP_OAUTH_GOOGLE_ID
 
-      const redirect_uri = 'https://sft.space/oauth/google'
-      // const redirect_uri = window.location.origin+'/oauth/vk'
+      const redirect_uri = window.location.origin+'/oauth/google'
       const uri_regex = new RegExp(redirect_uri)
 
-      const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=' + CLIENTD_ID +
+      const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=' + CLIENT_ID +
           '&redirect_uri=' + redirect_uri +
           '&scope=email%20profile' +
           '&response_type=code'

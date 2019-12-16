@@ -80,11 +80,12 @@ export default {
     },
 
     doLogin() {
-      const CLIENTD_ID = '7199975'
+      const CLIENT_ID = process.env.VUE_APP_OAUTH_VK_ID
 
-      const redirect_uri = 'https://sft.space/oauth/vk'
+      const redirect_uri = window.location.origin+'/oauth/vk'
       const uri_regex = new RegExp(redirect_uri)
-      const url = 'https://oauth.vk.com/authorize?client_id=' + CLIENTD_ID +
+
+      const url = 'https://oauth.vk.com/authorize?client_id=' + CLIENT_ID +
           '&display=popup' +
           '&redirect_uri=' + redirect_uri +
           '&scope=email' +
