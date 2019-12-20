@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 
 export default {
   name: 'OAuthFacebook',
@@ -62,7 +62,7 @@ export default {
       const code = this.getOAuthCode(location)
       if (!code)
         return data
-      data = { oauth: code, provider: 'facebook' }
+      data = {oauth: code, provider: 'facebook'}
       return data
     },
 
@@ -73,7 +73,7 @@ export default {
             this.closeAllModal()
           }
         }).catch((err) => {
-        this.closeAllModal()
+          this.closeAllModal()
           if (err.message === 'Request failed with status code 403') {
             this.openDialog(this.$lang.error.authEmailError)
           } else
@@ -84,14 +84,14 @@ export default {
     doLogin() {
       const CLIENT_ID = process.env.VUE_APP_OAUTH_FACEBOOK_ID
 
-      const redirect_uri = window.location.origin+'/oauth/facebook'
+      const redirect_uri = window.location.origin + '/oauth/facebook'
       const uri_regex = new RegExp(redirect_uri)
 
       const url = 'https://www.facebook.com/v5.0/dialog/oauth?client_id=' + CLIENT_ID +
           '&redirect_uri=' + redirect_uri +
           '&scope=email' +
           '&state={"{st=state123abc,ds=123456789}"}'
-      let win = this.windowPopup({ width: 720, height: 570, url: url })
+      let win = this.windowPopup({width: 720, height: 570, url: url})
       let error = null
       let ok = false
       let watch_timer = setInterval(() => {
@@ -113,7 +113,7 @@ export default {
         if (win.closed) {
           clearInterval(watch_timer)
           if (!ok)
-            this.addModal({ name: 'Login' })
+            this.addModal({name: 'Login'})
         }
       }, 100)
       return error

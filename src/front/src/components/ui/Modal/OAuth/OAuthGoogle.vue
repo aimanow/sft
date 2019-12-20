@@ -84,7 +84,7 @@ export default {
     doLogin() {
       const CLIENT_ID = process.env.VUE_APP_OAUTH_GOOGLE_ID
 
-      const redirect_uri = window.location.origin+'/oauth/google'
+      const redirect_uri = window.location.origin + '/oauth/google'
       const uri_regex = new RegExp(redirect_uri)
 
       const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=' + CLIENT_ID +

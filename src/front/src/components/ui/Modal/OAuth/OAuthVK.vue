@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 
 export default {
   name: 'OAuthVK',
@@ -60,7 +60,7 @@ export default {
       const code = this.getOAuthCode(location)
       if (!code)
         return data
-      data = { oauth: code, provider: 'vk' }
+      data = {oauth: code, provider: 'vk'}
       return data
     },
 
@@ -82,7 +82,7 @@ export default {
     doLogin() {
       const CLIENT_ID = process.env.VUE_APP_OAUTH_VK_ID
 
-      const redirect_uri = window.location.origin+'/oauth/vk'
+      const redirect_uri = window.location.origin + '/oauth/vk'
       const uri_regex = new RegExp(redirect_uri)
 
       const url = 'https://oauth.vk.com/authorize?client_id=' + CLIENT_ID +
@@ -90,7 +90,7 @@ export default {
           '&redirect_uri=' + redirect_uri +
           '&scope=email' +
           '&response_type=code'
-      let win = this.windowPopup({ width: 620, height: 370, url: url })
+      let win = this.windowPopup({width: 620, height: 370, url: url})
       let error = null
       let ok = false
       let watch_timer = setInterval(() => {
@@ -112,7 +112,7 @@ export default {
         if (win.closed) {
           clearInterval(watch_timer)
           if (!ok)
-            this.addModal({ name: 'Login' })
+            this.addModal({name: 'Login'})
         }
       }, 100)
       return error
