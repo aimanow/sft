@@ -30,6 +30,9 @@
           </div>
         </div>
       </div>
+      <div class="discussion-description">
+        {{discussion.description}}
+      </div>
       <Aspects :aspects="discussion.aspects"/>
       <div class="country_wr">
         <div class="country_title">{{$lang.descAdd.arg}}:</div>

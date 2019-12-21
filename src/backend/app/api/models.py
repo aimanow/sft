@@ -85,6 +85,7 @@ DiscussionModel = api.model('Discussion', {
     'id': fields.Integer(readonly=True, example=1, description="Discussion identifier"),
     'lang': fields.String(required=True, example="ru", description="Discussion language"),
     'title': fields.String(required=True, example="Есть ли жизнь на марсе?", description="Discussion display title"),
+    'description': fields.String(required=False, example="Описание дискуссии", description="Discussion display description"),
     'created_at': fields.DateTime(readonly=True, example=datetime.datetime(2019, 1, 5, 8, 2).isoformat(), description=(
         "Discussion creation datetime"
     )),
