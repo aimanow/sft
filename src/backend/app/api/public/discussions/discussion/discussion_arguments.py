@@ -103,4 +103,8 @@ class DiscussionArgumentList(Resource):
         db.session.add(ArgumentThesis(thesis=thesis, argument=argument))
         db.session.commit()
 
+        # PLAIN ADD ASPECTS TO RESPONSE
+        out_argument = argument.__dict__
+        out_argument['aspects'] = aspects
+
         return argument

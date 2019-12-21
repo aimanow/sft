@@ -178,6 +178,7 @@ ArgumentModel = api.model('Argument', {
         "Поиски жизни не привели к успеху."
     )),
     'aspect_ids': fields.List(fields.Integer(required=True, example=1, description='Aspect identifier')),
+    'aspects': fields.List(fields.Nested(AspectModel), readonly=True, required=False),
     'thesis': fields.Nested(ThesisModel, required=True),
     'opinion_ratio': fields.Nested(ArgumentOpinionRatioModel, readonly=True)
 })

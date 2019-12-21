@@ -55,6 +55,12 @@ export default {
         state.current_discussion.aspects.push(a)
       })
     },//*
+    addCurrentDiscussionAspects(state, payload) {
+      payload.aspects.forEach((a) => {
+        if (state.current_discussion.aspects.findIndex(af => af.id === a.id) < 0)
+          state.current_discussion.aspects.push(a)
+      })
+    },//*
     setThesisId(state, payload) {
       state.thesisId = payload
     },//*

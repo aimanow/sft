@@ -1,7 +1,12 @@
 <template>
   <div class="edu_block_wrap">
-    <div v-if="!thesis">
+    <div v-if="!thesis" style="margin-bottom: 16px">
       <div class="w_thesis_title">{{$lang.descAdd.aspects}}</div>
+      <div class="spinner" v-if="slickComp==null">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
       <component
         :is="slickComp" ref="slick" :options="SlickOptions" class="text-xs-center">
         <aspectItem
@@ -73,7 +78,7 @@
 //import aspectItem from './aspectItem' './Item'
 import aspectItem from '@/components/pages/Discussion/Add/Item'
 import {mapMutations, mapState, mapActions} from 'vuex'
-import {PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAllAspects} from '@/api'
+import {PostDiscussionArgements, PostDiscussionThesis, AddThesisFile, AddThesisLink, GetAspects, GetAllAspects} from '@/api'
 // import Slick from 'vue-slick'
 
 export default {
@@ -87,13 +92,11 @@ export default {
     id: null
   },
   mounted() {
-    this.$nextTick(function () {
-      this.slickComp = 'Slick'
-    })
+
   },
   data() {
     return {
-      slickComp: '',
+      slickComp: null,
       form: {
         thesis: '',
         argument: '',
@@ -104,6 +107,7 @@ export default {
       aspect_ids: [],
       aspectsCount: 0,
       localAspects: [],
+      allAspects: [],
       SlickOptions: {
         infinity: true,
         dots: true,
@@ -131,7 +135,9 @@ export default {
     ...mapState('discussion', ['current_discussion', 'discussion_aspects']),
     //...mapState('profile', ['all_aspects']),
     all_aspects() {
-      return this.localAspects.concat(this.discussion_aspects)
+      // return this.localAspects.concat(this.discussion_aspects)
+      // return this.localAspects
+      return this.allAspects
     },
     // favorite_aspects(){
     //   let arr =[];
@@ -148,7 +154,7 @@ export default {
 
   methods: {
     ...mapMutations('modal', ['closeAllModal']),
-    ...mapMutations('discussion', ['pushDiscussionArgument', 'pushDiscussionThesis', 'updateArgumentThesis']),
+    ...mapMutations('discussion', ['pushDiscussionArgument', 'pushDiscussionThesis', 'updateArgumentThesis', 'addCurrentDiscussionAspects']),
     ...mapActions('discussion', ['addDiscussionArguments']),
     ...mapActions('modal', ['addModal']),
     // addAspectId(id){
@@ -242,9 +248,9 @@ export default {
             AddThesisLink({id: myArg.thesis.id, link: this.form.links})
           }
           this.pushDiscussionArgument(myArg)
+          this.addCurrentDiscussionAspects({aspects: myArg.aspects})
 
           this.closeAllModal()
-
         })
       }
     },
@@ -287,17 +293,24 @@ export default {
 
   created() {
     this.localAspects = this.current_discussion.aspects
-    // GetAllAspects().then(res =>{
-    //   let  asp = res.data.items;
-    //   console.log(asp );
-    //   let fav_asp = [];
-    //   for (let i=0; i < asp.length; i++ ){
-    //     console.log(i);
-    //     if(asp[i].is_favorite){fav_asp.push(asp[i])
-    //     } else { break; }
-    //   }
+    // this.localAspects.forEach((a) => {
+    //   this.allAspects.push(a)
     // })
 
+
+    GetAllAspects().then(res => {
+      res.data.items.forEach((a) => {
+        // if (this.allAspects.findIndex(as => as.id === a.id) < 0) {
+        //   this.allAspects.push(a)
+        //   console.log(a)
+        // }
+        this.allAspects.push(a)
+      })
+      this.$nextTick(function () {
+        this.slickComp = 'Slick'
+      })
+      // this.loadingAspects = false
+    })
   }
 }
 </script>
@@ -344,6 +357,54 @@ export default {
     &.active, &:hover {
       background: linear-gradient(45deg, rgba(227, 20, 10, 1) 0%, rgba(236, 63, 81, 1) 100%);
       color: white;
+    }
+  }
+
+  .spinner {
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
+    margin-top: -2px;
+  }
+
+  .spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: #CFD9E4;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0)
+    }
+    40% {
+      -webkit-transform: scale(1.0)
+    }
+  }
+
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+    40% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
     }
   }
 </style>

@@ -3,8 +3,9 @@
     <div class="country_title">{{$lang.descAdd.select}}</div>
     <div class="aspect aspect-check">
       <Item v-for="item in aspects" :key="item.id || item.title" :item="item"/>
-      <div class="aspect_item aspect_item_new active" @click.prevent="addAspect" v-if="isOwner">
-        <a href="#" class="aspect_item_img">
+<!--      <div class="aspect_item aspect_item_new active" @click.prevent="addAspect" v-if="isOwner">-->
+      <div class="aspect_item aspect_item_new active" @click.prevent="addAspect" v-if="false">
+      <a href="#" class="aspect_item_img">
           <div class="aspect_item_text">
             <span class="icon-plus"></span>
             <p>{{$lang.descAdd.add}}</p>
