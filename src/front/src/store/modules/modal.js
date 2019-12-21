@@ -20,7 +20,7 @@ export default {
   },
 
   actions: {
-    addModal(ctx, { name, data }) {
+    addModal(ctx, {name, data}) {
       ctx.commit('add', {
         name,
         data

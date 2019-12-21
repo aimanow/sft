@@ -58,7 +58,7 @@ import OAuthGoogle from './OAuth/OAuthGoogle'
 
 import AspectEdit from './Discussion/AspectEdit'
 
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   name: 'Modal',
