@@ -11,6 +11,8 @@ export default {
     },
 
     closeAllModal(state) {
+      if (document)
+        document.oldScrollY = document.querySelector('.main-wrapper').style.top
       state.modals = []
     },
 
