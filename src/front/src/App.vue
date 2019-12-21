@@ -78,11 +78,9 @@ export default {
     modals() {
       if (this.modals.length > 0)
         return
-      const scrollY = document.querySelector('.main-wrapper').style.top
-      document.body.style.position = ''
-      document.body.style.top = ''
       this.$nextTick(() => {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+        if (window)
+          window.scrollTo(0, parseInt(document.oldScrollY || '0') * -1)
       })
     }
   },
