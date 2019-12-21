@@ -78,6 +78,9 @@ class DiscussionArgumentList(Resource):
         if len(payload['thesis']['message']) > 1000:
             return abort(HTTPStatus.FORBIDDEN, message="Too many character in thesis message")
 
+        if len(payload['thesis']['title']) > 100:
+            return abort(HTTPStatus.FORBIDDEN, message="Too many character in thesis title")
+
         aspects = Aspect.query.filter(Aspect.id.in_(payload['aspect_ids'])).limit(3).all()
 
         created_at = datetime.datetime.now()
