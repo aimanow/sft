@@ -21,15 +21,21 @@ module.exports = {
   addImage: 'Add image',
   addNewAspect: 'Add your own aspect option',
 
-  argAdditional:'Addition',
-  argConflict:'Refutation',
-  addThesis:'Add Thesis',
+  argAdditional: 'Addition',
+  argConflict: 'Refutation',
+  addThesis: 'Add Thesis',
 
-  graphCommit:'Confirm',
-  graphCredibleness:'Credibility ',
-  graphPersuasiveness:'Convincingness',
-  graphPersRaiting:'Convincingness Raiting',
-  graphCredRaiting:'Credibility Raiting',
+  graphCommit: 'Confirm',
+  graphCredibleness: 'Credibility ',
+  graphPersuasiveness: 'Convincingness',
+  graphPersRaiting: 'Convincingness Raiting',
+  graphCredRaiting: 'Credibility Raiting',
 
-  loadingAspects:'Loading aspects...',
+  loadingAspects: 'Loading aspects...',
+
+  errorMinThesisArgument: 'Please check fields thesis and arguments the fields must have at least 10 characters long',
+  errorMaxArgument: 'Please check argument field must have less than 100 characters long',
+  errorMaxThesis: 'Please check thesis message field must have less than 1000 characters long',
+  errorChooseAspects: 'Please check aspects, only maximum three aspects can be chosen',
+  errorYesNo: 'Please check Yes or No',
 }

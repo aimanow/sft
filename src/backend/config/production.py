@@ -20,6 +20,10 @@ class ProductionConfig(ConfigBase):
     if SQLALCHEMY_DATABASE_URI is None:
         raise EnvironmentError("DATABASE_URI env variable is not set")
 
+    ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL', 'http://192.168.100.1:9200')
+    if ELASTICSEARCH_URL is None:
+        raise EnvironmentError("ELASTICSEARCH_URL env variable is not set")
+
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
     if SQLALCHEMY_DATABASE_URI is None:
         raise EnvironmentError("UPLOAD_FOLDER env variable is not set")

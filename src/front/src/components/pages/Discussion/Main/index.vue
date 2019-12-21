@@ -30,6 +30,9 @@
           </div>
         </div>
       </div>
+      <div class="discussion-description">
+        {{discussion.description}}
+      </div>
       <Aspects :aspects="discussion.aspects"/>
       <div class="country_wr">
         <div class="country_title">{{$lang.descAdd.arg}}:</div>
@@ -47,8 +50,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import { GetCurrentDiscussions, ToggleDiscusionFreeze, DeleteDiscussion } from '@/api'
+import {mapState, mapActions} from 'vuex'
+import {GetCurrentDiscussions, ToggleDiscusionFreeze, DeleteDiscussion} from '@/api'
 import Aspects from './Aspects'
 import Argument from './Argument'
 
@@ -66,7 +69,7 @@ export default {
     }
   },
 
-  components: { Aspects, Argument },
+  components: {Aspects, Argument},
 
   computed: {
     ...mapState('discussion', [
@@ -169,10 +172,10 @@ export default {
     }
   },
   watch: {
-    'discussion_arguments': function() {
+    'discussion_arguments': function () {
       this.$forceUpdate()
     },
-    '$route.params.id': function(id) {
+    '$route.params.id': function (id) {
       this.$forceUpdate()
     }
   }
@@ -189,5 +192,21 @@ export default {
     width: auto;
     height: auto;
     background: none;
+  }
+
+  .discussion-description {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .discussion-description:before {
+    margin: 0 11px 4px 0;
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    border: 4px solid #0560CE;
+    border-radius: 50%;
   }
 </style>

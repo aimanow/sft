@@ -174,12 +174,16 @@ export default {
         }
       }
       if (this.thesis) {
-        if (this.form.thesis.length < 10) {
-          this.$store.commit('openDialog', 'Please check thesis message field must have at least 10 characters long')
+        if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
+          return false
+        }
+        if (this.form.argument.argument > 100) {
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMaxArgument)
           return false
         }
         if (this.form.thesis.length > 1000) {
-          this.$store.commit('openDialog', 'Please check thesis message field must have less than 1000 characters long')
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMaxThesis)
           return false
         }
 
@@ -191,7 +195,7 @@ export default {
                 this.updateArgumentThesis({
                   argument_id: this.id,
                   thesis_id: myThesis.id,
-                  attachments:response.data.attachments
+                  attachments: response.data.attachments
                 })
               })
             }
@@ -200,7 +204,7 @@ export default {
                 this.updateArgumentThesis({
                   argument_id: this.id,
                   thesis_id: myThesis.id,
-                  attachments:response.data.attachments
+                  attachments: response.data.attachments
                 })
               })
             }
@@ -209,19 +213,23 @@ export default {
           })
       } else {
         if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
-          this.$store.commit('openDialog', 'Please check filds thesis and arguments the filds must have at least 10 characters long')
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
+          return false
+        }
+        if (this.form.argument.argument > 100) {
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMaxArgument)
           return false
         }
         if (this.form.thesis.length > 1000) {
-          this.$store.commit('openDialog', 'Please check thesis message field must have less than 1000 characters long')
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMaxThesis)
           return false
         }
         if (this.aspectsCount === 0) {
-          this.$store.commit('openDialog', 'Please check Aspects \'Only maximum three aspects can be chosen\'')
+          this.$store.commit('openDialog', this.$lang.descAdd.errorChooseAspects)
           return false
         }
         if (this.form.position === null) {
-          this.$store.commit('openDialog', 'Please check Yes or No')
+          this.$store.commit('openDialog', this.$lang.descAdd.errorYesNo)
           return false
         }
 
