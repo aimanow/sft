@@ -50,7 +50,7 @@ export default {
       state.current_discussion = payload
     },//*
     changeCurrentDiscussionAspects(state, payload) {
-      state.current_discussion.aspects.splice(0, state.discussion_arguments.length)
+      state.current_discussion.aspects.splice(0, state.current_discussion.aspects.length)
       payload.aspects.forEach((a) => {
         state.current_discussion.aspects.push(a)
       })
