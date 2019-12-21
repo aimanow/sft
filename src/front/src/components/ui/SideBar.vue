@@ -40,9 +40,9 @@
           <li :class="{ 'active': activePage === 'Rewards' }">
             <router-link to="/profile/rewards"><span class="icon-cab4"></span><span class="cab_list_txt">{{$lang.main.achiv}}</span></router-link>
           </li>
-          <li :class="{ 'active': activePage === 'MainAreasOfKnowledge' }">
-            <router-link to="/profile/areas-of-knowledge"><span class="icon-cab5"></span><span class="cab_list_txt">{{$lang.main.obl}}</span></router-link>
-          </li>
+<!--          <li :class="{ 'active': activePage === 'MainAreasOfKnowledge' }">-->
+<!--            <router-link to="/profile/areas-of-knowledge"><span class="icon-cab5"></span><span class="cab_list_txt">{{$lang.main.obl}}</span></router-link>-->
+<!--          </li>-->
           <li :class="{ 'active': activePage === 'Delete' }">
             <router-link to="/profile/delete"><span class="icon-cab7"></span><span class="cab_list_txt">{{$lang.main.del}}</span></router-link>
           </li>
