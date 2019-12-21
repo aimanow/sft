@@ -174,7 +174,7 @@ export default {
         }
       }
       if (this.thesis) {
-        if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
+        if (this.form.thesis.length < 10 || this.form.argument.length < 10) {
           this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
           return false
         }
@@ -212,7 +212,7 @@ export default {
             this.closeAllModal()
           })
       } else {
-        if (this.form.thesis.length < 10 && this.form.argument.length < 10) {
+        if (this.form.thesis.length < 10 || this.form.argument.length < 10) {
           this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
           return false
         }
