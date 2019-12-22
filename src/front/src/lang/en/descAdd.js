@@ -33,7 +33,7 @@ module.exports = {
 
   loadingAspects: 'Loading aspects...',
 
-  errorMinThesisArgument: 'Please check fields thesis and arguments the fields must have at least 10 characters long',
+  errorMinThesisArgument: 'Please check fields thesis and argument, fields must have at least 10 characters long',
   errorMaxArgument: 'Please check argument field must have less than 100 characters long',
   errorMaxThesis: 'Please check thesis message field must have less than 1000 characters long',
   errorChooseAspects: 'Please check aspects, only maximum three aspects can be chosen',

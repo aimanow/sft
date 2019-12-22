@@ -180,12 +180,8 @@ export default {
         }
       }
       if (this.thesis) {
-        if (this.form.thesis.length < 10 || this.form.argument.length < 10) {
+        if (this.form.thesis.length < 10) {
           this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
-          return false
-        }
-        if (this.form.argument.argument > 100) {
-          this.$store.commit('openDialog', this.$lang.descAdd.errorMaxArgument)
           return false
         }
         if (this.form.thesis.length > 1000) {
