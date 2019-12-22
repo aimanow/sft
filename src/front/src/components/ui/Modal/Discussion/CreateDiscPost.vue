@@ -181,7 +181,7 @@ export default {
       }
       if (this.thesis) {
         if (this.form.thesis.length < 10) {
-          this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesisArgument)
+          this.$store.commit('openDialog', this.$lang.descAdd.errorMinThesis)
           return false
         }
         if (this.form.thesis.length > 1000) {
