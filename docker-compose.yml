@@ -1,6 +1,22 @@
 version: "3.5"
 
 services:
+  admindapp:
+    container_name: admindapp
+    build:
+      context: ./etc/docker/python
+    privileged: true
+    command: python app.py
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    ports:
+      - "1414:1414"
+    volumes:
+      - ./src/admin:/usr/src/app
+    networks:
+      - dockernet
+
   backendapp:
     container_name: backendapp
     build:
