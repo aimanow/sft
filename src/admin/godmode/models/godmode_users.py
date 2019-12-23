@@ -1,4 +1,4 @@
-import bcrypt
+from flask_bcrypt import Bcrypt
 
 from godmode.views.create_view import BaseCreateView
 from godmode.views.delete_view import BaseDeleteView
@@ -152,12 +152,12 @@ class GodModeUsersAdminModel(BaseAdminModel):
 
     @classmethod
     def hash_password(cls, password):
-        bcypted_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+        bcypted_password = Bcrypt().generate_password_hash(password.encode("utf-8"), 10)
         if isinstance(bcypted_password, bytes):
             return bcypted_password.decode("utf-8")
         return bcypted_password
 
     @classmethod
     def check_password(cls, user, raw_password):
-        is_valid = bcrypt.checkpw(raw_password.encode("utf-8"), user.password.encode("utf-8"))
+        is_valid = Bcrypt().check_password_hash(user.password.encode("utf-8"), raw_password.encode("utf-8"))
         return is_valid
