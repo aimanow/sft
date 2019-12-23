@@ -34,7 +34,7 @@ class Registration(Resource):
             fullname=args['fullname'],
             registered_at=datetime.datetime.now(),
             credentials_backref=UserCredentials(
-                email=args['email'],
+                email=args['email'].lower(),
                 password=args['password'],
             )
         )

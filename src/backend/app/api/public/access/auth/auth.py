@@ -20,6 +20,7 @@ from database.models import UserCredentials, User
 from database import db
 from sqlalchemy.exc import IntegrityError
 
+
 @access.route('/auth')
 class PasswordAuthentication(Resource):
     auth_parser = reqparse.RequestParser()
@@ -38,6 +39,9 @@ class PasswordAuthentication(Resource):
         """
 
         args = self.auth_parser.parse_args()
+        if args['email'] and args['email'] != '':
+            args['email'] = args['email'].lower()
+
         full_name = ''
         pass_password = False
 
