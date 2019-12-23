@@ -8,7 +8,7 @@ module.exports = {
   about: 'Über das Projekt',
   archiveDisc: 'Diskussion Diskussionsarchiv',
   feedback: 'Rückmeldung',
-  add: 'Diskussionsthemen hinzufügen',
+  add: 'Diskussion hinzufügen',
   cancel: 'Abbrechen',
 
   edu: 'Bildung',
