@@ -6,7 +6,7 @@ services:
     build:
       context: ./etc/docker/python
     privileged: true
-    command: python app.py
+    command: python3 app.py
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
