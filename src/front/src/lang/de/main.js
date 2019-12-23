@@ -13,10 +13,10 @@ module.exports = {
 
   edu: 'Bildung',
   fav: 'Ausgewählte Themen',
-  visited: 'Themen besucht',
+  visited: 'Besuchte Themen',
   achiv: 'Meine Belohnungen',
   obl: 'Meine Fachgebiete',
-  del: 'Löschen eines Kontos',
+  del: 'Konto löschen',
   signOut: 'Beenden',
 
 
