@@ -9,14 +9,14 @@ module.exports = {
   select: 'Aspekte auswählen',
   selectOne: 'Aspekte auswählen',
   arg: 'Argument',
-  theses: 'Thesis', //*
+  theses: 'These', //*
   links: 'Referenzen:',
   publish: 'Thema verfassen',
   yes: 'Ja',
   no: 'Nein',
   aspects: 'Meine Aspekte',
-  searchAspects: 'Choose Aspect',//*
-  nameAspects: 'Name of Aspects', //*
+  searchAspects: 'Aspekte auswählen',//*
+  nameAspects: 'Aspektname', //*
   attachments: 'Anhänge',
   addImage: 'Bild hinzufügen',
   addNewAspect: 'Fügen Sie Ihre eigene Aspektoption hinzu',
