@@ -39,8 +39,6 @@ class PasswordAuthentication(Resource):
         """
 
         args = self.auth_parser.parse_args()
-        if args['email'] and args['email'] != '':
-            args['email'] = args['email'].lower()
 
         full_name = ''
         pass_password = False
@@ -108,6 +106,9 @@ class PasswordAuthentication(Resource):
                         pass_password = True
         except Exception as e:
             pass
+
+        if args['email'] and args['email'] != '':
+            args['email'] = args['email'].lower()
 
         try:
             user_credentials: UserCredentials = UserCredentials.query.filter(UserCredentials.email == args['email']).one()
