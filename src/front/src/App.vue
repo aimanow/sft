@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="main-wrapper" :style="{ position:(modals.length > 0 ? 'fixed':'inherit'), top:modals.length > 0?`-${scrollY}px`:'' }">
+    <div class="main-wrapper" :style="{ position:(modals.length > 0 ? 'fixed':'inherit'), top:`-${scrollY}px` }">
       <div v-if="showPreloader" class="preloader">
         <div class="preloader_lays">
           <div class="preloader_para">
@@ -46,7 +46,7 @@ import Footer from '@/components/ui/Footer'
 import SideBar from '@/components/ui/SideBar'
 import Modal from '@/components/ui/Modal'
 
-import {mapMutations, mapActions, mapState} from 'vuex'
+import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -59,7 +59,7 @@ export default {
   computed: {
     ...mapState('modal', ['modals']),
     scrollY() {
-      if (window)
+      if (window && this.modals.length > 0)
         return window.scrollY
       return 0
     }
@@ -70,7 +70,7 @@ export default {
     ...mapActions('modal', ['addModal']),
     checkPasswordRecovery() {
       if (window.location.pathname === '/reset_password') {
-        this.addModal({name: 'PasswordRecovery'})
+        this.addModal({ name: 'PasswordRecovery' })
       }
     }
   },
@@ -121,7 +121,7 @@ export default {
     // }, 1000)
   },
 
-  components: {Header, Footer, SideBar, Modal}
+  components: { Header, Footer, SideBar, Modal }
 }
 </script>
 
