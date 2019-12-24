@@ -59,7 +59,7 @@ export default {
   computed: {
     ...mapState('modal', ['modals']),
     scrollY() {
-      if (window && this.modals.length > 0)
+      if (this.modals.length > 0 && window)
         return window.scrollY
       return 0
     }
